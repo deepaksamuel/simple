@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SimpleMaterialPropertyBuilder</class>
+ <widget class="QWidget" name="SimpleMaterialPropertyBuilder">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>469</width>
+    <height>451</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">font: 8pt &quot;Ubuntu Condensed&quot;;</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="7" column="1">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="13" column="1">
+    <widget class="QLabel" name="label_4">
+     <property name="text">
+      <string>Constant Property</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="4" colspan="3">
+    <widget class="QComboBox" name="g4_materials"/>
+   </item>
+   <item row="14" column="5">
+    <widget class="QLabel" name="const_prop_unit">
+     <property name="text">
+      <string>--</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="3">
+    <widget class="QLineEdit" name="g4_prop_energies"/>
+   </item>
+   <item row="12" column="4">
+    <widget class="QLineEdit" name="g4_prop_value"/>
+   </item>
+   <item row="10" column="1" colspan="2">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>Property</string>
+     </property>
+    </widget>
+   </item>
+   <item row="15" column="1" colspan="6">
+    <widget class="QPlainTextEdit" name="commands"/>
+   </item>
+   <item row="13" column="4">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>value</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="5">
+    <widget class="QLabel" name="prop_unit">
+     <property name="text">
+      <string>--</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="6">
+    <widget class="QPushButton" name="addProperty">
+     <property name="text">
+      <string>Add property</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QLabel" name="new_material_label">
+     <property name="text">
+      <string>New material name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="6">
+    <widget class="QPushButton" name="add_const_property">
+     <property name="text">
+      <string>Add Const. Property</string>
+     </property>
+    </widget>
+   </item>
+   <item row="16" column="6">
+    <widget class="QPushButton" name="done">
+     <property name="text">
+      <string>Modify property</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="3">
+    <widget class="QLabel" name="label_6">
+     <property name="text">
+      <string>Energies (eV (comma separated)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="4">
+    <widget class="QDoubleSpinBox" name="g4_const_prop_value">
+     <property name="decimals">
+      <number>10</number>
+     </property>
+     <property name="minimum">
+      <double>-9999999.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>9999999.000000000000000</double>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="1" colspan="3">
+    <widget class="QLineEdit" name="mat_name"/>
+   </item>
+   <item row="10" column="4">
+    <widget class="QLabel" name="label_3">
+     <property name="text">
+      <string>Values (comma separated)</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="4">
+    <widget class="QLabel" name="label_8">
+     <property name="text">
+      <string>Base material</string>
+     </property>
+    </widget>
+   </item>
+   <item row="12" column="1" colspan="2">
+    <widget class="QComboBox" name="g4_property">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="14" column="1" colspan="3">
+    <widget class="QComboBox" name="g4_const_property">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

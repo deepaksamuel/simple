@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/copy-item.png</file>
+        <file>icons/delete-button.png</file>
+        <file>icons/visibility.png</file>
+        <file>icons/cube.png</file>
+        <file>icons/cylinder.png</file>
+        <file>icons/sphere.png</file>
+        <file>icons/wedge.png</file>
+        <file>icons/settings.png</file>
+        <file>icons/box-mesh.png</file>
+        <file>icons/cyl-mesh.png</file>
+        <file>icons/filter.png</file>
+        <file>icons/save.png</file>
+    </qresource>
+</RCC>
