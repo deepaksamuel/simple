@@ -1,5 +1,5 @@
 #include "SimpleAction.h"
-
+// File modified by Deepak Samuel on 25 Sep 2019
 SimpleAction::SimpleAction() : G4VUserActionInitialization()
 {
     pGunPointer = new SimpleGun;

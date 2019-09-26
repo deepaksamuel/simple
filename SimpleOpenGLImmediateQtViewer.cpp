@@ -1,4 +1,4 @@
-
+// File modified by Deepak Samuel on 25 Sep 2019
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -30,7 +30,7 @@
 // Class SimpleOpenGLImmediateQtViewer : a class derived from G4OpenGLQtViewer and
 //                                G4OpenGLImmediateViewer.
 
-#include "SimpleOpenGLImmediateQtviewer.h"
+#include "SimpleOpenGLImmediateQtViewer.h"
 #include "G4OpenGLImmediateSceneHandler.hh"
 
 #include "G4ios.hh"

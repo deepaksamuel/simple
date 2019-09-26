@@ -1,6 +1,6 @@
 #ifndef SIMPLESTOREDVIS_H
 #define SIMPLESTOREDVIS_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 
 #include "G4OpenGLQt.hh"
 #include <QGLWidget>

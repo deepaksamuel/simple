@@ -1,6 +1,6 @@
 #ifndef SIMPLEOPENGLQTVIEWER_H
 #define SIMPLEOPENGLQTVIEWER_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 //
 // ********************************************************************
 // * License and Disclaimer                                           *

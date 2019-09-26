@@ -1,6 +1,7 @@
 
 
 //
+// File modified by Deepak Samuel on 25 Sep 2019
 // ********************************************************************
 // * License and Disclaimer                                           *
 // *                                                                  *
@@ -31,7 +32,7 @@
 // Class SimpleOpenGLStoredQtViewer : a class derived from G4OpenGLQtViewer and
 //                                G4OpenGLStoredViewer.
 
-
+//-------------------------------------------------------------------------
 #include "SimpleOpenGLStoredQtViewer.h"
 
 

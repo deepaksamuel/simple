@@ -1,8 +1,7 @@
 #ifndef SIMPLEOPENGLSTOREDQTVIEWER_H
 #define SIMPLEOPENGLSTOREDQTVIEWER_H
-
-
-
+//---
+// File modified by Deepak Samuel on 25 Sep 2019
 #include "G4OpenGLStoredViewer.hh"
 #include "SimpleOpenGLQtViewer.h"
 #include <qgl.h>  // include qglwidget

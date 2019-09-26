@@ -1,3 +1,4 @@
+// File modified by Deepak Samuel on 25 Sep 2019
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -47,7 +48,7 @@
 #include "G4OpenGLImmediateQtViewer.hh"
 #include "G4OpenGLStoredSceneHandler.hh"
 #include "G4OpenGLStoredQtViewer.hh"
-#include "SimpleOpenGLImmediateQtviewer.h"
+#include "SimpleOpenGLImmediateQtViewer.h"
 
 SimpleVis::SimpleVis ():
     G4OpenGLQt ("OpenGLImmediateQt",

@@ -1,6 +1,6 @@
 #ifndef SIMPLEGUN_H
 #define SIMPLEGUN_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleGun.hh"

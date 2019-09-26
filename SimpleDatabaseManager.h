@@ -1,6 +1,6 @@
 #ifndef SIMPLEDATABASEMANAGER_H
 #define SIMPLEDATABASEMANAGER_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 #include <QtSql/QSqlError>
 #include <QtSql/QSqlDatabase>
 #include <QDebug>

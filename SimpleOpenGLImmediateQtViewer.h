@@ -1,6 +1,6 @@
 #ifndef SIMPLEOPENGLIMMEDIATEQTVIEWER_H
 #define SIMPLEOPENGLIMMEDIATEQTVIEWER_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 //
 // ********************************************************************
 // * License and Disclaimer                                           *
@@ -36,7 +36,7 @@
 
 
 #include "G4OpenGLImmediateViewer.hh"
-#include "SimpleOpenGLQtviewer.h"
+#include "SimpleOpenGLQtViewer.h"
 
 #include <qgl.h> // include <qglwidget.h>
 

@@ -1,6 +1,6 @@
 #ifndef SIMPLEDETECTORCONSTRUCTION_H
 #define SIMPLEDETECTORCONSTRUCTION_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 #include "G4VUserDetectorConstruction.hh"
 #include "G4NistManager.hh"
 #include "globals.hh"

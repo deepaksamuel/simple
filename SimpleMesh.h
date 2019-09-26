@@ -3,7 +3,7 @@
 #include <QObject>
 #include <G4ThreeVector.hh>
 #include <QJsonObject>
-
+// File modified by Deepak Samuel on 25 Sep 2019
 class SimpleMesh : public QObject
 {
     Q_OBJECT

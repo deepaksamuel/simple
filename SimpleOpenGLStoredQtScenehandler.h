@@ -1,6 +1,6 @@
 #ifndef SIMPLEOPENGLSTOREDQTSCENEHANDLER_H
 #define SIMPLEOPENGLSTOREDQTSCENEHANDLER_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 //
 // ********************************************************************
 // * License and Disclaimer                                           *

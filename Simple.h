@@ -1,6 +1,6 @@
 #ifndef SIMPLE_H
 #define SIMPLE_H
-
+// File modified by Deepak Samuel on 25 Sep 2019
 #include <QMainWindow>
 #include <G4RunManager.hh>
 #include <G4MTRunManager.hh>
