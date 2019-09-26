@@ -12,5 +12,7 @@
         <file>icons/cyl-mesh.png</file>
         <file>icons/filter.png</file>
         <file>icons/save.png</file>
+        <file>icons/simple-banner.png</file>
+        <file>icons/S.png</file>
     </qresource>
 </RCC>

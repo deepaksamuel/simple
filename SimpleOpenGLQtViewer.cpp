@@ -32,7 +32,7 @@
 // 27/06/2003 : G.Barrand : implementation (at last !).
 // 30/06/2014 : M.Kelsey :  Change QPixmap objects to pointers
 
-#include "SimpleOpenGLQtviewer.h"
+#include "SimpleOpenGLQtViewer.h"
 
 #include "G4OpenGLSceneHandler.hh"
 #include "G4VSolid.hh"

@@ -38,7 +38,7 @@
 #include "G4LogicalVolumeModel.hh"
 #include "G4Text.hh"
 #include "G4VPhysicalVolume.hh"
-#include "SimpleOpenGLQtviewer.h"
+#include "SimpleOpenGLQtViewer.h"
 #include <typeinfo>
 #include <sstream>
 

@@ -53,7 +53,6 @@ SOURCES += \
     SimpleOpenGLImmediateQtViewer.cpp \
     SimpleOpenGLQtViewer.cpp \
     SimpleOpenGLStoredQtScenehandler.cpp \
-    SimpleOpenGLStoredQtviewer.cpp \
     SimplePhysicslist.cpp \
     SimplePhysicslistDialog.cpp \
     SimpleRunAction.cpp \
@@ -61,7 +60,8 @@ SOURCES += \
     SimpleStoredVis.cpp \
     SimpleVis.cpp \
     SimpleMaterialBuilder.cpp \
-    SimpleMaterialPropertyBuilder.cpp
+    SimpleMaterialPropertyBuilder.cpp \
+    SimpleOpenGLStoredQtViewer.cpp
 
 
 
@@ -91,8 +91,6 @@ HEADERS += \
     SimpleMeshTableModel.h \
     SimpleObject.h \
     SimpleObjectTableModel.h \
-    SimpleOpenGLImmediateQtviewer.h \
-    SimpleOpenGLQtviewer.h \
     SimpleOpenGLStoredQtScenehandler.h \
     SimpleOpenGLStoredQtViewer.h \
     SimplePhysicslist.h \
@@ -102,7 +100,9 @@ HEADERS += \
     SimpleStoredVis.h \
     SimpleVis.h \
     SimpleMaterialBuilder.h \
-    SimpleMaterialPropertyBuilder.h
+    SimpleMaterialPropertyBuilder.h \
+    SimpleOpenGLImmediateQtViewer.h \
+    SimpleOpenGLQtViewer.h
 
 
 
@@ -131,11 +131,11 @@ QMAKE_CXXFLAGS+=-pthread -std=c++11 -m64 -I/home/samuel/root_v6.18.04.source/roo
 
 DISTFILES += \
     db.sqlite \
-    db.sqlite \
     bragg-peak.sim \
     cobalt-decay.sim \
     visinit.mac \
-    visupdate.mac
+    visupdate.mac \
+    cerenkov.sim
 
 RESOURCES += \
     resources.qrc
