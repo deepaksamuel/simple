@@ -31,6 +31,8 @@
 #include <physics_lists/PhysListEmPolarized.hh>
 #include <physics_lists/PhysicsList_DMX.hh>
 #include <physics_lists/PhysicsList_DNA.hh>
+#include <G4OpticalPhysics.hh>
+#include "FTFP_BERT.hh"
 
 
 Simple::Simple(int argc, char *argv[],QWidget *parent) :
@@ -219,36 +221,42 @@ void Simple::InitPhysicsLists()
     if(physListName == "Proton / Heavy Ion Therapy"){
         physicsList =   new  PhysicsList_Hadrontherapy();
         is_user_physics_list=true;
+        qDebug()<<"Current physics List (application based): "<<physListName;
         return;
     }
     if(physListName == "Radioactive decay"){
         qDebug()<<"Radioactive decay";
         physicsList =   new  PhysicsList_RadDecay;
         is_user_physics_list=true;
+        qDebug()<<"Current physics List (application based): "<<physListName;
         return;
     }
 
     if(physListName == "Optical (Cerenkov / Scintillation)"){
         physicsList =   new  PhysicsList_Opt();
         is_user_physics_list=true;
+        qDebug()<<"Current physics List (application based): "<<physListName;
         return;
     }
 
     if(physListName == "DNA physics"){
         physicsList =   new  PhysicsList_DNA();
         is_user_physics_list=true;
+        qDebug()<<"Current physics List (application based): "<<physListName;
         return;
     }
 
     if(physListName == "Underground experiment (Dark Matter)"){
         physicsList =   new  PhysicsList_DMX();
         is_user_physics_list=true;
+        qDebug()<<"Current physics List (application based): "<<physListName;
         return;
     }
 
     if(physListName == "Polarized EM physics (spin transfer of electrons)"){
         physicsList =   new  PhysicsList_PolEM();
         is_user_physics_list=true;
+        qDebug()<<"Current physics List (application based): "<<physListName;
         return;
     }
 
@@ -256,7 +264,7 @@ void Simple::InitPhysicsLists()
     is_user_physics_list = false;
     G4PhysListFactory *physListFactory = new G4PhysListFactory();
     physicsList =   physListFactory->GetReferencePhysList(currentPhysicsList.toLatin1().data());
-
+    qDebug()<<"Current physics List (G4): "<<physListName;
 
 }
 
@@ -400,7 +408,6 @@ void Simple::InitGeant4(int argc, char *argv[])
     ui->g4_settings->setText(QString(ver).append(" / ").append("Physics list: ").append(currentPhysicsList));
     output(QString(ver));
 #endif
-
 
 
     scManager = G4ScoringManager::GetScoringManager();
@@ -2095,7 +2102,7 @@ void Simple::InitViewer()
         "/vis/scene/endOfEventAction accumulate 100",
         "/vis/scene/add/scale",
         "/vis/scene/add/axes",
-        "/vis/ogl/set/displayListLimit 50000"
+        "/vis/ogl/set/displayListLimit 500000000"
     };
 
     Execute(commands);

@@ -20,4 +20,5 @@
 #/vis/scene/endOfEventAction accumulate
 
 /vis/geometry/set/visibility World 0 true
+/vis/ogl/set/displayListLimit 5000000000
 #/vis/viewer/flush

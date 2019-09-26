@@ -4,7 +4,7 @@
 
 
 #include "G4OpenGLStoredViewer.hh"
-#include "SimpleOpenGLQtviewer.h"
+#include "SimpleOpenGLQtViewer.h"
 #include <qgl.h>  // include qglwidget
 
 class QMouseEvent;

@@ -22,6 +22,10 @@
   <property name="windowTitle">
    <string>Simple</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="resources.qrc">
+    <normaloff>:/icons/icons/S.png</normaloff>:/icons/icons/S.png</iconset>
+  </property>
   <property name="styleSheet">
    <string notr="true"/>
   </property>
@@ -2103,7 +2107,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                <x>0</x>
                <y>0</y>
                <width>1429</width>
-               <height>207</height>
+               <height>226</height>
               </rect>
              </property>
              <attribute name="label">

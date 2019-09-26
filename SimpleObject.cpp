@@ -85,7 +85,7 @@ SimpleObject::SimpleObject(QString type, G4ThreeVector pos, G4ThreeVector rot, G
 
     G4NistManager* nist = G4NistManager::Instance();
 
-    if(objMaterial.contains("G4"))
+    if(objMaterial.contains("G4_"))
         g4material = nist->FindOrBuildMaterial(objMaterial.toLatin1().data());
     else {
         // custom material, created

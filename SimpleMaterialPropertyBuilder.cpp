@@ -183,7 +183,11 @@ void SimpleMaterialPropertyBuilder::SetMaterialProperties(G4Material *mat, QStri
         }
 
     }
+    qDebug()<<"Setting material table...";
     mat->SetMaterialPropertiesTable(matTable);
+    qDebug()<<"Dumping table properties...";
+    qDebug()<<matTable->GetPropertyIndex("SPECULARSPIKECONSTANT")<<mat->GetMaterialPropertiesTable()->GetPropertyIndex("SPECULARSPIKECONSTANT");
+    matTable->DumpTable();
 }
 
 void SimpleMaterialPropertyBuilder::on_g4_const_property_currentTextChanged(const QString &arg1)

@@ -83,7 +83,7 @@ void SimpleDatabaseManager::SetEnvVar(QString name, QString path)
 void SimpleDatabaseManager::InsertNewMaterial(QString name, QString formula)
 {
     QSqlQuery query;
-    QString sqlcommand = QString("INSERT INTO materials VALUES('%1','%2')").arg(name).arg(formula);
+    QString sqlcommand = QString("INSERT INTO materials VALUES('%1','%2','')").arg(name).arg(formula);
     qDebug()<<sqlcommand;
     query.exec(sqlcommand);
 }

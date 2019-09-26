@@ -56,7 +56,7 @@ SimpleMesh::SimpleMesh(QJsonObject jo)
 
     bins.set(jo["binsx"].toInt(),jo["binsy"].toInt(),jo["binsz"].toInt());
     position.set(jo["posx"].toDouble(),jo["posy"].toDouble(),jo["posz"].toDouble());
-    position.set(jo["rotx"].toDouble(),jo["roty"].toDouble(),jo["rotz"].toDouble());
+    rotation.set(jo["rotx"].toDouble(),jo["roty"].toDouble(),jo["rotz"].toDouble());
 
 
    for(int ii=0;ii<3;ii++)
