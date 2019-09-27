@@ -227,56 +227,58 @@ void Simple::InitPhysicsLists()
 
     is_first_time_use = dialog->isFirstTimeUse();
 
+    if(!is_first_time_use){
+        QString physListName = currentPhysicsList;
 
-    QString physListName = currentPhysicsList;
+        if(physListName == "Proton / Heavy Ion Therapy"){
+            physicsList =   new  PhysicsList_Hadrontherapy();
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
+        if(physListName == "Radioactive decay"){
+            qDebug()<<"Radioactive decay";
+            physicsList =   new  PhysicsList_RadDecay;
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
 
-    if(physListName == "Proton / Heavy Ion Therapy"){
-        physicsList =   new  PhysicsList_Hadrontherapy();
-        is_user_physics_list=true;
-        qDebug()<<"Current physics List (application based): "<<physListName;
-        return;
+        if(physListName == "Optical (Cerenkov / Scintillation)"){
+            physicsList =   new  PhysicsList_Opt();
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
+
+        if(physListName == "DNA physics"){
+            physicsList =   new  PhysicsList_DNA();
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
+
+        if(physListName == "Underground experiment (Dark Matter)"){
+            physicsList =   new  PhysicsList_DMX();
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
+
+        if(physListName == "Polarized EM physics (spin transfer of electrons)"){
+            physicsList =   new  PhysicsList_PolEM();
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
+
+        // this gets executed if none of the above custom physics list are chosen.
+        is_user_physics_list = false;
+        G4PhysListFactory *physListFactory = new G4PhysListFactory();
+        physicsList =   physListFactory->GetReferencePhysList(currentPhysicsList.toLatin1().data());
+        qDebug()<<"Current physics List (G4): "<<physListName;
     }
-    if(physListName == "Radioactive decay"){
-        qDebug()<<"Radioactive decay";
-        physicsList =   new  PhysicsList_RadDecay;
-        is_user_physics_list=true;
-        qDebug()<<"Current physics List (application based): "<<physListName;
-        return;
-    }
-
-    if(physListName == "Optical (Cerenkov / Scintillation)"){
-        physicsList =   new  PhysicsList_Opt();
-        is_user_physics_list=true;
-        qDebug()<<"Current physics List (application based): "<<physListName;
-        return;
-    }
-
-    if(physListName == "DNA physics"){
-        physicsList =   new  PhysicsList_DNA();
-        is_user_physics_list=true;
-        qDebug()<<"Current physics List (application based): "<<physListName;
-        return;
-    }
-
-    if(physListName == "Underground experiment (Dark Matter)"){
-        physicsList =   new  PhysicsList_DMX();
-        is_user_physics_list=true;
-        qDebug()<<"Current physics List (application based): "<<physListName;
-        return;
-    }
-
-    if(physListName == "Polarized EM physics (spin transfer of electrons)"){
-        physicsList =   new  PhysicsList_PolEM();
-        is_user_physics_list=true;
-        qDebug()<<"Current physics List (application based): "<<physListName;
-        return;
-    }
-
-    // this gets executed if none of the above custom physics list are chosen.
-    is_user_physics_list = false;
-    G4PhysListFactory *physListFactory = new G4PhysListFactory();
-    physicsList =   physListFactory->GetReferencePhysList(currentPhysicsList.toLatin1().data());
-    qDebug()<<"Current physics List (G4): "<<physListName;
+    QMessageBox::warning(this,"Set environment varibles", "If you are using this application for the first time, please enter the Geant4 environment variables for datasets, click update and restart!");
 
 }
 
