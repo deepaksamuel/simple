@@ -278,6 +278,7 @@ void Simple::InitPhysicsLists()
         physicsList =   physListFactory->GetReferencePhysList(currentPhysicsList.toLatin1().data());
         qDebug()<<"Current physics List (G4): "<<physListName;
     }
+    else
     QMessageBox::warning(this,"Set environment varibles", "If you are using this application for the first time, please enter the Geant4 environment variables for datasets, click update and restart!");
 
 }

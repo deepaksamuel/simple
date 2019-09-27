@@ -134,7 +134,11 @@ DISTFILES += \
     cobalt-decay.sim \
     visinit.mac \
     visupdate.mac \
-    cerenkov.sim
+    cerenkov.sim \
+    README \
+    ../linuxdeploy/linuxdeploy-centos6-x86_64.AppImage \
+    ../linuxdeploy/linuxdeploy-plugin-appimage-x86_64.AppImage \
+    ../linuxdeploy/linuxdeploy-plugin-qt-x86_64.AppImage
 
 RESOURCES += \
     resources.qrc

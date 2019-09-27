@@ -1,0 +1,3 @@
+Run the command
+./linuxdeploy-centos6-x86_64.AppImage --appdir=/home/samuel/simple-app --output appimage --plugin qt
+for creating the appImage.
