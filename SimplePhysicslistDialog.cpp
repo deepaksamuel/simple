@@ -41,3 +41,8 @@ bool PhysicsListDialog::isVisDisabled()
 {
     return ui->disable_vis->isChecked();
 }
+
+bool PhysicsListDialog::isFirstTimeUse()
+{
+    return ui->firstTimeUse->isChecked();
+}

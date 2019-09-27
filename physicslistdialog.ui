@@ -49,19 +49,6 @@ font: 8pt &quot;Ubuntu Condensed&quot;;
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
       <widget class="QLabel" name="label">
        <property name="text">
         <string>Number of threads</string>
@@ -78,6 +65,26 @@ font: 8pt &quot;Ubuntu Condensed&quot;;
        </property>
        <property name="value">
         <number>4</number>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="firstTimeUse">
+       <property name="text">
+        <string>First time use</string>
        </property>
       </widget>
      </item>

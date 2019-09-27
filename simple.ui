@@ -853,7 +853,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="documentMode">
          <bool>false</bool>
@@ -2111,7 +2111,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
               </rect>
              </property>
              <attribute name="label">
-              <string>Geant4 environment variables and material database</string>
+              <string>Geant4 environment variables and material database (Needs restart, if variables are changed)</string>
              </attribute>
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>

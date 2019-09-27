@@ -300,6 +300,7 @@ private:
     QString last_opened_file;
     bool is_user_physics_list;
     bool is_vis_disabled;
+    bool is_first_time_use;
 
 
 

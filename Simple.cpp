@@ -51,9 +51,16 @@ Simple::Simple(int argc, char *argv[],QWidget *parent) :
     if(InitDB()==0){
         InitEnvVars();
         InitMaterials();
+
         InitPhysicsLists();
         InitUI();
-        InitGeant4(argc,argv);
+        if(!is_first_time_use){
+            ui->fViewerTabWidget->setCurrentIndex(0);
+            InitGeant4(argc,argv);
+        }
+        else {
+            ui->fViewerTabWidget->setCurrentIndex(1);
+        }
         InitRoot();
         CreateMenus();
     }
@@ -206,6 +213,7 @@ void Simple::InitMaterials()
 void Simple::InitPhysicsLists()
 {
     is_user_physics_list=false;
+
     refPhysicsNames = dbManager->GetListOfRefPhysics();
     refPhysicsHints = dbManager->GetListOfRefPhysicsHints();
 
@@ -216,6 +224,9 @@ void Simple::InitPhysicsLists()
     currentPhysicsList = dialog->GetSelectedPhysicsList();
     nThreads = dialog->GetNumberofThreads();
     is_vis_disabled = dialog->isVisDisabled();
+
+    is_first_time_use = dialog->isFirstTimeUse();
+
 
     QString physListName = currentPhysicsList;
 

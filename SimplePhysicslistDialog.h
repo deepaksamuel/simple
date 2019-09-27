@@ -17,6 +17,7 @@ public:
     QString GetSelectedPhysicsList();
     int GetNumberofThreads();
     bool isVisDisabled();
+    bool isFirstTimeUse();
     ~PhysicsListDialog();
 
 private slots:
