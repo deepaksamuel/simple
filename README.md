@@ -20,8 +20,18 @@ https://github.com/deepaksamuel/simple/releases/download/v0.1-alpha/Simple-x86_6
 
 No need to compile or download Geant4 or ROOT. Just double click on the app image. If you are a first time user, you will have to set the path to the Geant4 datasets (you will have to check the "First time user" checkbox). The Geant4 datasets are available from 
 https://geant4.web.cern.ch/support/download
+Also, do not forget to place the db.sqlite (available in this repo) file next to the app. This is very important. In case you don't do it, the application creates its own db.sqlite file which is empty and useless. 
 
-TODO:
+As a first example:
+#Open bragg-peak.sim file in the application and click on "Shoot beam". Go to Scoring mesh tab on the left side and right click on the mesh to plot projection. Wait for a few seconds for the simulation to run.
+
+#In the dataframe tab, open the data folder which is created automatically in the same folder as your application. This folder contains all the data files created in your simulation. 
+
+#Double click on temp-energyDeposit-Box-Mesh.root
+
+#Go to the plots tab and type "totalvalueMeV:binz" and press enter to see the Bragg peak.
+
+#TODO:
 --AppImages for other Linux distributions like CentOS
 --Windows version
 
