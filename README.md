@@ -18,15 +18,15 @@ This tool can also be used as a demonstration tool in nuclear and particle physi
 The application is opensource and the alpha release for Linux is available as of now as an AppImage (tested in Ubuntu 19.04) at 
 https://github.com/deepaksamuel/simple/releases/download/v0.1-alpha/Simple-x86_64.AppImage
 
-<b>No need to compile or download Geant4 or ROOT. Just download and double click the app image and you are ready to go!<\b>
 
-If you are a first time user, you will have to set the path to the Geant4 datasets (you will have to check the "First time user" checkbox in the first dialog box that appears). The Geant4 datasets are available from 
-https://geant4.web.cern.ch/support/download 
+<b>AppImages are what executables are for Windows. No need to compile or download Geant4 or ROOT. Just download and double click the app image and you are ready to go!</b>
 
-and these have to be on your computer for the application to run any simulations.
+Before you begin, you must have all the Geant4 datasets on your computer which are available at  
+https://geant4.web.cern.ch/support/download. 
 
+When the application is run for the first time, you mush check the "First time use" checkbox in the first dialog box that appears. Next, you must set the Geant4 dataset locations in the user interface that comes up and click update. If there are any errors in the folder paths, the output log will display them. This has to be done only once on a system as long as the datasets are not moved to a different location.
 
-<b>Also, do not forget to place the db.sqlite (available in this repo) file next to the app. This is very important. In case you don't do it, the application creates its own db.sqlite file which is empty and useless. <\b>
+<b>Also, do not forget to place the db.sqlite (available in this repo) file next to the app. This is very important. In case you don't do it, the application creates its own db.sqlite file which is empty and useless. </b>
 
 As a first example:
 
