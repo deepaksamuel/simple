@@ -1,6 +1,6 @@
 <h2>Simple: Geant4 simplified</h2>
 
-![Alt text] (https://user-images.githubusercontent.com/2099017/65814713-ffbe8a00-e202-11e9-9a2a-d42ed8e643ae.png "Screenshot")
+![Screenshot](https://github.com/deepaksamuel/simple/blob/master/simple-bragg.png)
 
 
 Every particle/nuclear/medical/space physicist would have heard about Geant4 or probably even used it for their analysis. A tool designed to simulate particle interactions with matter, it is one of the tools developed at CERN used equally by researchers in academia and industry. Written in C++, it can simulate right from complex particle interactions taking place at the Large Hadron Collider (mother of Higgs Boson - the God particle) to the simple radioactive decay. One can construct detectors, shoot various particles and measure the response using Geant4.
