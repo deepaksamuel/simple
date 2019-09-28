@@ -138,7 +138,8 @@ DISTFILES += \
     README \
     ../linuxdeploy/linuxdeploy-centos6-x86_64.AppImage \
     ../linuxdeploy/linuxdeploy-plugin-appimage-x86_64.AppImage \
-    ../linuxdeploy/linuxdeploy-plugin-qt-x86_64.AppImage
+    ../linuxdeploy/linuxdeploy-plugin-qt-x86_64.AppImage \
+    simple.desktop
 
 RESOURCES += \
     resources.qrc

@@ -1,3 +1,22 @@
+Download from https://github.com/linuxdeploy
+a) linuxdeploy
+b) linuxdeploy-plugin-qt
+c) linuxdeploy-plugin-appimage
+and put them all in the same location
+
+
 Run the command
+
 ./linuxdeploy-centos6-x86_64.AppImage --appdir=/home/samuel/simple-app --output appimage --plugin qt
 for creating the appImage.
+simple-app is the directory inside which the "appimage" directory structure will be automatically created.
+The first time this is executed, it will result in an error but no worries.
+Next,
+a) in the bin folder,put the simple executable
+b) in the applcations folder put the simple.desktop file
+c) in the 256x256 folder put the simple.png file
+d) copy the xcbglintegrations plugin folder from the system (/usr/lib/x86_64-linux-gnu/qt5/plugins) to the plugin folder
+e) most of the root folders (etc, bin, lib, fonts, include etc...) should also be copied inside the usr folder
+
+Run the command again.
+./linuxdeploy-centos6-x86_64.AppImage --appdir=/home/samuel/simple-app --output appimage --plugin qt

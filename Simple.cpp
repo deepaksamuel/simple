@@ -64,6 +64,9 @@ Simple::Simple(int argc, char *argv[],QWidget *parent) :
         InitRoot();
         CreateMenus();
     }
+    else{
+
+    }
 
     g4started=true;
 }
@@ -137,11 +140,14 @@ int Simple::InitDB()
     dbManager = new SimpleDatabaseManager;
     if(!dbManager){
         output("Unknown error in accessing database manager (SQLITE3)...","error");
+        QMessageBox::information(this, tr("Database error"),
+                                 tr("Unknown error in accessing database manager (SQLITE3)"));
         return -1;
     }
     else {
         if(dbManager->GetListOfShapes().count()==0) {// this is an indication that we are not able to access the db file, probably it is not in the right place!
-            output("Database file not found in expected location...","error");
+            QMessageBox::information(this, tr("No database files found"),
+                                     tr("The database file db.sqlite, usually placed next to the application, is missing or empty."));
             return -2;
         }
         else{
@@ -216,9 +222,8 @@ void Simple::InitPhysicsLists()
 
     refPhysicsNames = dbManager->GetListOfRefPhysics();
     refPhysicsHints = dbManager->GetListOfRefPhysicsHints();
-
-
     PhysicsListDialog* dialog = new PhysicsListDialog(this);
+
     dialog->SetContents(refPhysicsNames,refPhysicsHints);
     dialog->exec();
     currentPhysicsList = dialog->GetSelectedPhysicsList();
@@ -2179,34 +2184,40 @@ void Simple::on_actionBox_triggered()
 {
     ui->shapesList->setCurrentText("Box");
     on_addObject_clicked();
+    ui->sceneTreeWidget->setCurrentIndex(0);
 }
 
 void Simple::on_actionCylinder_triggered()
 {
     ui->shapesList->setCurrentText("Cylinder");
     on_addObject_clicked();
+    ui->sceneTreeWidget->setCurrentIndex(0);
 }
 
 void Simple::on_actionSphere_triggered()
 {
     ui->shapesList->setCurrentText("Sphere");
     on_addObject_clicked();
+    ui->sceneTreeWidget->setCurrentIndex(0);
 }
 
 void Simple::on_actionWedge_triggered()
 {
     ui->shapesList->setCurrentText("Wedge");
     on_addObject_clicked();
+    ui->sceneTreeWidget->setCurrentIndex(0);
 }
 
 void Simple::on_actionBox_Mesh_triggered()
 {
     on_add_box_mesh_clicked();
+    ui->sceneTreeWidget->setCurrentIndex(1);
 }
 
 void Simple::on_actionCylinder_Mesh_triggered()
 {
     on_add_cylindrical_mesh_clicked();
+    ui->sceneTreeWidget->setCurrentIndex(1);
 }
 
 void Simple::on_actionShoot_beam_triggered()
