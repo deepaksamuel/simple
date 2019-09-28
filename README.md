@@ -12,6 +12,13 @@ Qt for user interface building, Geant4 as the simulation engine and ROOT for dat
 
 This tool can also be used as a demonstration tool in nuclear and particle physics/ medical physics classes and can aid in teaching students about data analysis techniques, in general, using external libraries like python.
 
-The application is opensource and will be available for Linux as of now as an AppImage.
+The application is opensource and the alpha release for Linux is available as of now as an AppImage (tested in Ubuntu 19.04) at 
 
-The beta version is almost complete but if you are interested in it or would like to know more details, please contact me.
+https://github.com/deepaksamuel/simple/releases/download/v0.1-alpha/Simple-x86_64.AppImage
+No need to compile or download Geant4 or ROOT. Just double click on the app image. If you are a first time user, you will have to set the path to the Geant4 datasets (you will have to check the "First time user" checkbox). The Geant4 datasets are available from 
+https://geant4.web.cern.ch/support/download
+
+TODO:
+--AppImages for other Linux distributions like CentOS
+--Windows version
+
