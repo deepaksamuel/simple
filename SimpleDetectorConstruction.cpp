@@ -78,7 +78,7 @@ void SimpleDetectorConstruction::print(SimpleObject *obj)
     qDebug()<<"Dimensions (mm)"<<obj->GetDimensions();
     qDebug()<<"Position (mm)"<<obj->GetPosition().x()<<obj->GetPosition().y()<<obj->GetPosition().z();
     qDebug()<<"Rotation (deg)"<<obj->GetRotation().x()<<obj->GetRotation().y()<<obj->GetRotation().z();
-    qDebug()<<"Mag. Field (G)"<<obj->GetRotation().x()<<obj->GetRotation().y()<<obj->GetRotation().z();
+    qDebug()<<"Mag. Field (G)"<<obj->GetMagField().x()<<obj->GetMagField().y()<<obj->GetMagField().z();
     qDebug()<<"Material"<<obj->GetG4Material()->GetName();
     if(obj->GetG4Material()->GetMaterialPropertiesTable()!=nullptr)
         obj->GetG4Material()->GetMaterialPropertiesTable()->DumpTable();
@@ -561,7 +561,7 @@ void SimpleDetectorConstruction::setMagneticFields()
         if(ii==0){// world volume
             if(objects.at(0)->GetMagField().x()!=0.000 ||
                     objects.at(0)->GetMagField().y()!=0.000 ||
-                    objects.at(0)->GetMagField().z()!=0.000 ){
+                    objects.at(0)->GetMagField().z()!=0.000){
                 G4ThreeVector fieldValue = G4ThreeVector(objects.at(0)->GetMagField().x()*gauss,
                                                          objects.at(0)->GetMagField().y()*gauss,
                                                          objects.at(0)->GetMagField().z()*gauss);

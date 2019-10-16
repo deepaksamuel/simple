@@ -60,7 +60,13 @@ SimpleObject::SimpleObject(QString type, G4ThreeVector pos, G4ThreeVector rot, G
     objMaterialProps ="";
     record_data = rec_data;
     isSolid=true;
-    mag_field_changed=false;
+
+    if(magField.x()==0.00000 & magField.y()==0.0000 && magField.z()==0.0000)
+        mag_field_changed=false;
+    else {
+        mag_field_changed=true;
+    }
+    magfield_off = false;
 
     jsonObject["id"] = id;
     jsonObject["objName"] = objName;
@@ -114,7 +120,13 @@ SimpleObject::SimpleObject(QJsonObject jo)
     objMaterialFormula = jo["objMaterialFormula"].toString();
     objMaterialProps=  jo["objMaterialProps"].toString();
     record_data =  jo["record_data"].toBool();
-    mag_field_changed=false;
+
+    if(magField.x()==0.00000 & magField.y()==0.0000 && magField.z()==0.0000)
+        mag_field_changed=false;
+    else {
+        mag_field_changed=true;
+    }
+    magfield_off = false;
 
     int par_count=0;
 

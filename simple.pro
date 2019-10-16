@@ -139,7 +139,9 @@ DISTFILES += \
     ../linuxdeploy/linuxdeploy-centos6-x86_64.AppImage \
     ../linuxdeploy/linuxdeploy-plugin-appimage-x86_64.AppImage \
     ../linuxdeploy/linuxdeploy-plugin-qt-x86_64.AppImage \
-    simple.desktop
+    simple.desktop \
+    musr.sim \
+    ICAL.sim
 
 RESOURCES += \
     resources.qrc

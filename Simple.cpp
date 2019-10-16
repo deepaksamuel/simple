@@ -284,7 +284,7 @@ void Simple::InitPhysicsLists()
         qDebug()<<"Current physics List (G4): "<<physListName;
     }
     else
-    QMessageBox::warning(this,"Set environment varibles", "If you are using this application for the first time, please enter the Geant4 environment variables for datasets, click update and restart!");
+        QMessageBox::warning(this,"Set environment varibles", "If you are using this application for the first time, please enter the Geant4 environment variables for datasets, click update and restart!");
 
 }
 
@@ -1229,15 +1229,33 @@ void Simple::on_sourceShape_currentIndexChanged(const QString &arg1)
 
     if((arg1=="Rectangle") || (arg1=="Ellipse") )
     {
-        ui->shape_label1->setText("half x");
-        ui->shape_label_2->setText("half y");
+        ui->shape_label1->setText("half x (mm)");
+        ui->shape_label_2->setText("half y (mm)");
         ui->shape_label_3->setText("");
 
     }
 
+    if(arg1=="Cube"){
+        ui->shape_label1->setText("half x (mm)");
+        ui->shape_label_2->setText("half y (mm)");
+        ui->shape_label_3->setText("half z (mm)");
+    }
+
+    if(arg1=="Cylinder"){
+        ui->shape_label1->setText("radius (mm)");
+        ui->shape_label_2->setText("half z (mm)");
+        ui->shape_label_3->setText("");
+    }
+
     if((arg1=="Circle") || (arg1=="Sphere") )
     {
-        ui->shape_label1->setText("radius");
+        ui->shape_label1->setText("radius (mm)");
+        //ui->shape_label1->setText("");
+    }
+
+    if((arg1=="Beam") )
+    {
+        ui->shape_label1->setText("Beam position spread (mm)");
         //ui->shape_label1->setText("");
     }
 }
@@ -1301,11 +1319,12 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
     else     // particle source
         commands.append( QString("/gps/particle %1").arg(particle)); // particle type
 
-
     if(sourceType=="Point")
     {
         commands.append("/gps/pos/type Point");
     }
+    //TODO
+    //For a Plane this can be Circle, Annulus, Ellipse, Square, Rectangle. For both Surface or Volume sources this can be Sphere, Ellipsoid, Cylinder, Para (parallelepiped).
 
     else if((sourceType=="Rectangle") || (sourceType=="Circle") || (sourceType=="Elliptical"))
     {
@@ -1317,6 +1336,17 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
     {
         commands.append("/gps/pos/type Surface");
         commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
+    }
+
+    else if ((sourceType=="Cube" )|| (sourceType =="Cylinder") || (sourceType=="Sphere")) {
+        commands.append("/gps/pos/type Volume");
+        if(sourceType=="Cube")
+            sourceType="Para";
+        commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
+    }
+
+    else if(sourceType.contains("Beam")){
+        commands.append("/gps/pos/type Beam");
     }
 
     // source dimensions
@@ -1332,6 +1362,20 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
         commands.append(QString("/gps/pos/radius %1 mm").arg(sourceDims.at(0)) );
     }
 
+    else if(sourceType=="Para"){ // Cube = Para --> changed a few lines above
+        commands.append(QString("/gps/pos/halfx %1 mm").arg(sourceDims.at(0)) );
+        commands.append(QString("/gps/pos/halfy %1 mm").arg(sourceDims.at(1)) );
+        commands.append(QString("/gps/pos/halfz %1 mm").arg(sourceDims.at(2)) );
+    }
+    else if(sourceType=="Cylinder"){ // Cube = Para --> changed a few lines above
+        commands.append(QString("/gps/pos/radius %1 mm").arg(sourceDims.at(0)) );
+        commands.append(QString("/gps/pos/halfz %1 mm").arg(sourceDims.at(1)) );
+    }
+    else if(sourceType=="Beam"){
+        commands.append(QString("/gps/pos/sigma_r %1 deg").arg(sourceDims.at(0)) );
+    }
+
+
     // centre
     commands.append(QString("/gps/pos/centre %1 %2 %3 mm").arg(sourceCentre.x()).arg(sourceCentre.y()).arg(sourceCentre.z()));
 
@@ -1343,10 +1387,8 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
 
     else{
         // angular distribution
-        if(angularType=="gauss"){
-            commands.append(QString("/gps/ang/type beam1d"));
+        if(angularType=="gauss" || angularType=="beam1d"){
             commands.append(QString("/gps/ang/sigma_r %1 deg").arg(ui->sigma->value()));
-
         }
         else { //TODO: the ui-> parameters should ideally be part of the function as arguments.
             commands.append(QString("/gps/ang/type %1").arg(angularType));
@@ -1964,6 +2006,8 @@ void Simple::SaveProject(QString fileName)
     QJsonDocument saveDoc(json);
     saveFile.write(saveDoc.toJson());
     saveFile.close();
+    last_opened_file = fileName;
+    setWindowTitle(QString("Simple (%1)").arg(fileName));
 }
 void Simple::on_actionSave_triggered()
 {
@@ -2094,6 +2138,7 @@ void Simple::on_actionOpen_triggered()
 
     openFile.close();
     last_opened_file = fileName;
+    setWindowTitle(QString("Simple (%1)").arg(fileName));
 
 
 }
@@ -2334,4 +2379,11 @@ void Simple::on_actionNew_Material_triggered()
 void Simple::on_actionMaterial_property_triggered()
 {
     SimpleMaterialPropertyBuilder::getInstance()->ShowUI();
+}
+
+void Simple::on_switch_off_mag_fields_stateChanged(int arg1)
+{
+    foreach(SimpleObject *o, objectList)
+        o->setMagFieldOff(ui->switch_off_mag_fields->isChecked());
+    UpdateGeometry();
 }

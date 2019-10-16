@@ -264,6 +264,8 @@ private slots:
 
     void on_actionMaterial_property_triggered();
 
+    void on_switch_off_mag_fields_stateChanged(int arg1);
+
 private:
     Ui::Simple *ui;
     G4UImanager* UImanager;

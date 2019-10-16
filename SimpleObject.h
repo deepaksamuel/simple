@@ -43,7 +43,7 @@ public:
     bool GetVisibility(){return !isHidden;}
     G4ThreeVector GetPosition(){return position;}
     G4ThreeVector GetRotation(){return rotation;}
-    G4ThreeVector GetMagField(){return magField;}
+    G4ThreeVector GetMagField(){if(magfield_off == false) return magField; else return G4ThreeVector(0.0000,0.0000,0.0000);}
     //    G4ThreeVector GetBins(){return bins;}
     //    void SetBins(G4ThreeVector bin){bins=bin;}
     G4Material* GetG4Material(){return g4material;}
@@ -88,6 +88,7 @@ public:
     int appendMomentumParamters(int column_id,const G4Step* step);
     int appendEnergyParameters(int column_id,const G4Step* step);
     int appendProcessName(int column_id,const G4Step* step);
+    void setMagFieldOff(bool state){magfield_off=state;}
     QJsonObject jsonobject(){return jsonObject;}
     //    QStringList GetScoringCommands();
     //  void appendParticleId(int nn, int p_id, int parentId){pid.append(p_id); parent_id.append(parentId);}
@@ -110,6 +111,7 @@ private:
     bool isSolid;
     //bool is_mesh;
     bool mag_field_changed; // this flag is required to minimize unneccessary initialization of magnetic field in detector construction
+    bool magfield_off; // temporary switch off magnetic field
 
     G4ThreeVector position, rotation, magField, bins; // mm, deg, G
     QStringList dim_names;
@@ -124,6 +126,7 @@ private:
     G4CSGSolid* solidvol; // all shapes inherit from this
     G4Material* g4material;
     QJsonObject jsonObject;
+
 
     // data holders
 

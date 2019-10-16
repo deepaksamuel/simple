@@ -96,26 +96,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="material_label">
-            <property name="text">
-             <string>Material</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="4">
-           <widget class="QComboBox" name="objMaterial">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="frame">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="8">
            <spacer name="horizontalSpacer_6">
             <property name="orientation">
@@ -128,6 +108,41 @@
              </size>
             </property>
            </spacer>
+          </item>
+          <item row="0" column="7">
+           <widget class="QPushButton" name="addObject">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>Ubuntu Condensed</family>
+              <pointsize>8</pointsize>
+              <weight>50</weight>
+              <italic>false</italic>
+              <bold>false</bold>
+              <underline>true</underline>
+             </font>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">color: rgb(32, 74, 135);</string>
+            </property>
+            <property name="text">
+             <string> Add object</string>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
           <item row="0" column="6">
            <widget class="QComboBox" name="objColor">
@@ -190,84 +205,23 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QComboBox" name="shapesList">
+          <item row="0" column="4">
+           <widget class="QComboBox" name="objMaterial">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <item>
-             <property name="text">
-              <string>Box</string>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/icons/icons/cube.png</normaloff>:/icons/icons/cube.png</iconset>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Cylinder</string>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/icons/icons/cylinder.png</normaloff>:/icons/icons/cylinder.png</iconset>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Sphere</string>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/icons/icons/sphere.png</normaloff>:/icons/icons/sphere.png</iconset>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Wedge</string>
-             </property>
-             <property name="icon">
-              <iconset resource="resources.qrc">
-               <normaloff>:/icons/icons/wedge.png</normaloff>:/icons/icons/wedge.png</iconset>
-             </property>
-            </item>
+            <property name="frame">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
-          <item row="0" column="7">
-           <widget class="QPushButton" name="addObject">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <family>Ubuntu Condensed</family>
-              <pointsize>8</pointsize>
-              <weight>50</weight>
-              <italic>false</italic>
-              <bold>false</bold>
-              <underline>true</underline>
-             </font>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">color: rgb(32, 74, 135);</string>
-            </property>
+          <item row="0" column="3">
+           <widget class="QLabel" name="material_label">
             <property name="text">
-             <string> Add object</string>
-            </property>
-            <property name="flat">
-             <bool>true</bool>
+             <string>Material</string>
             </property>
            </widget>
           </item>
@@ -341,6 +295,59 @@
              </widget>
             </item>
            </layout>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="shapesList">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <item>
+             <property name="text">
+              <string>Box</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/icons/cube.png</normaloff>:/icons/icons/cube.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cylinder</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/icons/cylinder.png</normaloff>:/icons/icons/cylinder.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Sphere</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/icons/sphere.png</normaloff>:/icons/icons/sphere.png</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Wedge</string>
+             </property>
+             <property name="icon">
+              <iconset resource="resources.qrc">
+               <normaloff>:/icons/icons/wedge.png</normaloff>:/icons/icons/wedge.png</iconset>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="7" column="8">
+           <widget class="QCheckBox" name="switch_off_mag_fields">
+            <property name="text">
+             <string>Swtich off all magnetic fields</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -853,7 +860,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="documentMode">
          <bool>false</bool>
@@ -927,7 +934,7 @@
 font: 8pt &quot;Ubuntu Condensed&quot;;</string>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="page_12">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -1175,6 +1182,26 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                   <item>
                    <property name="text">
                     <string>Sphere</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Cube</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Cylinder</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Sphere</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>Beam</string>
                    </property>
                   </item>
                  </widget>
@@ -1440,6 +1467,11 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                   <item>
                    <property name="text">
                     <string>gauss</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>beam1d</string>
                    </property>
                   </item>
                  </widget>
@@ -1786,6 +1818,12 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                 </item>
                 <item row="3" column="4">
                  <widget class="QDoubleSpinBox" name="polz">
+                  <property name="minimumSize">
+                   <size>
+                    <width>80</width>
+                    <height>0</height>
+                   </size>
+                  </property>
                   <property name="minimum">
                    <double>-1.000000000000000</double>
                   </property>
@@ -2107,7 +2145,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                <x>0</x>
                <y>0</y>
                <width>1429</width>
-               <height>226</height>
+               <height>207</height>
               </rect>
              </property>
              <attribute name="label">
