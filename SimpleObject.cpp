@@ -384,7 +384,7 @@ void SimpleObject::ClearData()
 
 void SimpleObject::FillData(const G4Step *step, ulong event_id)
 {
-    if(record_data){
+    if(record_data && step->GetPreStepPoint()->GetTouchableHandle() ->GetVolume()->GetLogicalVolume()->GetName()==objName.toLatin1().data()){
         int columnId =0;
         if((filterIDs.contains(step->GetTrack()->GetDefinition()->GetPDGEncoding())) || (filterIDs.count()==0)){
             G4AnalysisManager* man = G4AnalysisManager::Instance();
