@@ -155,7 +155,7 @@ DISTFILES += \
     musr.sim \
     ICAL.sim \
     new-release-update \
-    ../build-simple-Desktop-Release/mICAL.sim
+    mICAL.sim
 
 RESOURCES += \
     resources.qrc
