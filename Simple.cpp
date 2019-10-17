@@ -1332,11 +1332,11 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
         commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
     }
 
-    else if((sourceType=="Sphere"))
-    {
-        commands.append("/gps/pos/type Surface");
-        commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
-    }
+//    else if((sourceType=="Sphere"))
+//    {
+//        commands.append("/gps/pos/type Surface");
+//        commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
+//    }
 
     else if ((sourceType=="Cube" )|| (sourceType =="Cylinder") || (sourceType=="Sphere")) {
         commands.append("/gps/pos/type Volume");
