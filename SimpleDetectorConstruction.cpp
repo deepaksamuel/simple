@@ -188,7 +188,8 @@ G4VPhysicalVolume* SimpleDetectorConstruction::Construct()
         bool magFieldChanged=false;
         for(int ii=0; ii<objects.count(); ii++){
             SimpleObject* obj = objects.at(ii);
-            magFieldChanged=obj->magFieldChanged();
+            if(magFieldChanged==false)
+                magFieldChanged=obj->magFieldChanged();
             Draw(obj);
             if(ii<100)
                 print(obj);

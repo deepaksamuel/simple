@@ -32,6 +32,7 @@
 #include <physics_lists/PhysListEmPolarized.hh>
 #include <physics_lists/PhysicsList_DMX.hh>
 #include <physics_lists/PhysicsList_DNA.hh>
+#include <physics_lists/PhysicsList_MuDecayWithSpin.hh>
 #include <G4OpticalPhysics.hh>
 #include "FTFP_BERT.hh"
 
@@ -272,6 +273,13 @@ void Simple::InitPhysicsLists()
 
         if(physListName == "Polarized EM physics (spin transfer of electrons)"){
             physicsList =   new  PhysicsList_PolEM();
+            is_user_physics_list=true;
+            qDebug()<<"Current physics List (application based): "<<physListName;
+            return;
+        }
+
+        if(physListName == "Muon decay with spin"){
+            physicsList =   new  PhysicsList_MuDecayWithSpin("FTFP_BERT");
             is_user_physics_list=true;
             qDebug()<<"Current physics List (application based): "<<physListName;
             return;

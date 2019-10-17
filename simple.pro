@@ -61,7 +61,13 @@ SOURCES += \
     SimpleVis.cpp \
     SimpleMaterialBuilder.cpp \
     SimpleMaterialPropertyBuilder.cpp \
-    SimpleOpenGLStoredQtViewer.cpp
+    SimpleOpenGLStoredQtViewer.cpp \
+    physics_lists/PhysicsList_MuDecayWithSpin.cc \
+    physics_lists/F04StepMax.cc \
+    physics_lists/PhysListEmStandard.cc \
+    physics_lists/F04ExtraPhysics.cc \
+    physics_lists/F04PhysicsListMessenger.cc \
+    physics_lists/MyG4EmStandardPhysics_option4.cc
 
 
 
@@ -101,7 +107,13 @@ HEADERS += \
     SimpleMaterialBuilder.h \
     SimpleMaterialPropertyBuilder.h \
     SimpleOpenGLImmediateQtViewer.h \
-    SimpleOpenGLQtViewer.h
+    SimpleOpenGLQtViewer.h \
+    physics_lists/PhysicsList_MuDecayWithSpin.hh \
+    physics_lists/F04StepMax.hh \
+    physics_lists/F04ExtraPhysics.hh \
+    physics_lists/PhysListEmStandard.hh \
+    physics_lists/F04PhysicsListMessenger.hh \
+    physics_lists/MyG4EmStandardPhysics_option4.hh
 
 
 
@@ -141,7 +153,8 @@ DISTFILES += \
     ../linuxdeploy/linuxdeploy-plugin-qt-x86_64.AppImage \
     simple.desktop \
     musr.sim \
-    ICAL.sim
+    ICAL.sim \
+    new-release-update
 
 RESOURCES += \
     resources.qrc

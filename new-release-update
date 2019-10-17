@@ -1,0 +1,6 @@
+#!/bin/bash
+echo "Pushing to remote repository"
+git push
+echo "Creating appimage (The folders linuxdeploy and simple-app are assumed to be existing"
+cd /home/samuel/linuxdeploy
+./linuxdeploy-centos6-x86_64.AppImage --appdir=/home/samuel/simple-app --output appimage --plugin qt

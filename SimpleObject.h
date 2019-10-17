@@ -47,6 +47,7 @@ public:
     //    G4ThreeVector GetBins(){return bins;}
     //    void SetBins(G4ThreeVector bin){bins=bin;}
     G4Material* GetG4Material(){return g4material;}
+    void SetObjectId(int id){objId = id;}
     void SetMaterial(QString material);
     void SetPosition(G4ThreeVector pos){
         position =pos;
@@ -94,7 +95,6 @@ public:
     //  void appendParticleId(int nn, int p_id, int parentId){pid.append(p_id); parent_id.append(parentId);}
 private:
     static int objId; // a running id auto incremented
-
     int id; // id of the local object
     QString objName;
     QString objType;

@@ -9,6 +9,7 @@
 
 int SimpleObject::objId=0;
 
+
 SimpleObject::SimpleObject(QString type, G4ThreeVector pos, G4ThreeVector rot, G4ThreeVector mag, QString material, QString material_formula, QString color, bool rec_data)
 {
     // is_mesh=false;
@@ -61,7 +62,7 @@ SimpleObject::SimpleObject(QString type, G4ThreeVector pos, G4ThreeVector rot, G
     record_data = rec_data;
     isSolid=true;
 
-    if(magField.x()==0.00000 & magField.y()==0.0000 && magField.z()==0.0000)
+    if(magField.x()==0.00000 && magField.y()==0.0000 && magField.z()==0.0000)
         mag_field_changed=false;
     else {
         mag_field_changed=true;
@@ -102,6 +103,7 @@ SimpleObject::SimpleObject(QString type, G4ThreeVector pos, G4ThreeVector rot, G
             objMaterialFormula="";
         }
     }
+
     objId++;
 }
 
@@ -121,7 +123,7 @@ SimpleObject::SimpleObject(QJsonObject jo)
     objMaterialProps=  jo["objMaterialProps"].toString();
     record_data =  jo["record_data"].toBool();
 
-    if(magField.x()==0.00000 & magField.y()==0.0000 && magField.z()==0.0000)
+    if(magField.x()==0.00000 && magField.y()==0.0000 && magField.z()==0.0000)
         mag_field_changed=false;
     else {
         mag_field_changed=true;
@@ -151,6 +153,7 @@ SimpleObject::SimpleObject(QJsonObject jo)
         }
     }
     jsonObject = jo;
+    if(objId<id) objId=id; // or else multiple objects with same name might be created, if the user has deleted some objects in between
     objId++;
 }
 
