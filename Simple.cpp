@@ -1109,6 +1109,7 @@ SimpleObject* Simple::MakeCopy(SimpleObject *obj, int alongaxis, float sep)
     SimpleObject *new_object = new SimpleObject(obj->GetObjectType(),new_position,obj->GetRotation(),obj->GetMagField(),obj->GetMaterial(),obj->GetMaterialFormula(),obj->GetColor());
 
     new_object->SetDimensions(obj->GetDimensions());
+    new_object->SetDataStorage(obj->storeData());
     AddObject(new_object);
     return new_object;
 }
