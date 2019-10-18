@@ -191,7 +191,7 @@ G4VPhysicalVolume* SimpleDetectorConstruction::Construct()
             if(magFieldChanged==false)
                 magFieldChanged=obj->magFieldChanged();
             Draw(obj);
-            if(ii<100)
+            //if(ii<100)
                 print(obj);
         }
         if(magFieldChanged) // do this only if magnetic field changed

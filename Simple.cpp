@@ -903,8 +903,7 @@ void Simple::AddObject(QJsonObject json)
         AddObject(mesh);
     }
 
-
-
+    UpdateGeometry();
 }
 
 
@@ -928,7 +927,7 @@ void Simple::AddObject(SimpleObject *obj)
         ui->shapesList->setEnabled(true);
     ui->objectTree->setCurrentItem(t);
     on_objectTree_itemClicked(t,0);
-    UpdateGeometry();
+    //UpdateGeometry();
     ui->addObject->setText("Add "+ ui->shapesList->currentText());
 
 }
@@ -1089,6 +1088,7 @@ void Simple::on_duplicate_clicked()
                     }
                 }
             }
+            UpdateGeometry();
 
         }
 
