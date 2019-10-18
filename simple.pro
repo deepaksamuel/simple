@@ -155,7 +155,8 @@ DISTFILES += \
     musr.sim \
     ICAL.sim \
     new-release-update \
-    mICAL.sim
+    mICAL.sim \
+    ICAL2.sim
 
 RESOURCES += \
     resources.qrc
