@@ -869,6 +869,7 @@ void Simple::on_addObject_clicked()
                                          false);
     obj->SetDimensions(parameters);
     AddObject(obj);
+    UpdateGeometry();
     //    }
 
 
