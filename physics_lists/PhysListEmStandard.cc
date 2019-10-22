@@ -59,7 +59,7 @@
 
 #include "G4StepLimiter.hh"
 
-#include "F04PhysicsList.hh"
+#include "PhysicsList_MuDecayWithSpin.hh"
 
 #include "G4LivermoreBremsstrahlungModel.hh" // ku
 #include "G4LivermorePhotoElectricModel.hh"

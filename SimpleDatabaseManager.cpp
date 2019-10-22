@@ -75,7 +75,7 @@ QStringList SimpleDatabaseManager::GetListOfEnvVarValues()
 void SimpleDatabaseManager::SetEnvVar(QString name, QString path)
 {
     QSqlQuery query;
-    QString sqlcommand = QString("UPDATE env_vars SET env_var='%1' WHERE value='%2'").arg(path).arg(name);
+    QString sqlcommand = QString("UPDATE env_vars SET value='%1' WHERE env_var='%2'").arg(path).arg(name);
     qDebug()<<sqlcommand;
     query.exec(sqlcommand);
 

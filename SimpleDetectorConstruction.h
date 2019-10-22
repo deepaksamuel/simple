@@ -22,7 +22,7 @@
 #include "G4TransportationManager.hh"
 #include "G4FieldManager.hh"
 #include "SimpleSteppingAction.h"
-#include <G4GDMLParser.hh>
+//#include <G4GDMLParser.hh>
 #include "G4GlobalMagFieldMessenger.hh"
 #include "SimpleObject.h"
 

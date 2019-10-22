@@ -266,6 +266,8 @@ private slots:
 
     void on_switch_off_mag_fields_stateChanged(int arg1);
 
+    void on_auto_search_g4variables_clicked();
+
 private:
     Ui::Simple *ui;
     G4UImanager* UImanager;

@@ -860,7 +860,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <property name="documentMode">
          <bool>false</bool>
@@ -2144,8 +2144,8 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1429</width>
-               <height>207</height>
+               <width>1406</width>
+               <height>226</height>
               </rect>
              </property>
              <attribute name="label">
@@ -2225,6 +2225,19 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                   </property>
                   <property name="text">
                    <string>Update</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="auto_search_g4variables">
+                  <property name="maximumSize">
+                   <size>
+                    <width>65</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Auto search</string>
                   </property>
                  </widget>
                 </item>

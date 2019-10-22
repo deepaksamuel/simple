@@ -29,7 +29,7 @@
 #include "globals.hh"
 
 #include "F04PhysicsListMessenger.hh"
-#include "F04PhysicsList.hh"
+#include "PhysicsList_MuDecayWithSpin.hh"
 
 #include <G4UIdirectory.hh>
 #include "G4UIcmdWithABool.hh"

@@ -1342,11 +1342,11 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
         commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
     }
 
-//    else if((sourceType=="Sphere"))
-//    {
-//        commands.append("/gps/pos/type Surface");
-//        commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
-//    }
+    //    else if((sourceType=="Sphere"))
+    //    {
+    //        commands.append("/gps/pos/type Surface");
+    //        commands.append(QString("/gps/pos/shape %1").arg(sourceType) );
+    //    }
 
     else if ((sourceType=="Cube" )|| (sourceType =="Cylinder") || (sourceType=="Sphere")) {
         commands.append("/gps/pos/type Volume");
@@ -2396,4 +2396,109 @@ void Simple::on_switch_off_mag_fields_stateChanged(int arg1)
     foreach(SimpleObject *o, objectList)
         o->setMagFieldOff(ui->switch_off_mag_fields->isChecked());
     UpdateGeometry();
+}
+
+void Simple::on_auto_search_g4variables_clicked()
+{
+    QMessageBox::information(this, tr("Warning"),
+                             tr("For this process to work properly, all your geant4 data files must be inside a single folder, say G4DATA, which you will set in the next dialog box. The program will then automatically set the paths to the datasets."));
+
+    QString dir = QFileDialog::getExistingDirectory(this, "Select a directory inside which all your G4 datasets reside..");
+
+    QDirIterator dirIt(dir, QDirIterator::Subdirectories);
+
+    QStringList dir_keys{"pixe/alpha/l/pwba/l3-24.dat","z72.a185","RoughESRGrease_LUTR.dat","pi0pi0.dat","ENSDFSTATE.dat","table_radius_hfb.dat","frldm.dat","ThermalScattering/Coherent/FS/al_metal.z","livermore/comp/ce-cs-47.dat","z65.a150","alpha/inel34"};
+    QStringList g4_ds_env_var{"G4PIIDATA","G4RADIOACTIVEDATA","G4REALSURFACEDATA","G4SAIDXSDATA","G4ENSDFSTATEDATA","G4INCLDATA","G4ABLADATA","G4NEUTRONHPDATA","G4LEDATA","G4LEVELGAMMADATA","G4PARTICLEXSDATA"};
+   // QStringList g4_ds_env_paths;
+
+
+    // we search for the keys in the folder and retrieve the folder name. This will ensure that this works even if the version of the dataset changes
+    while(dirIt.hasNext()){
+        //qDebug()<<dirIt.next();
+        QString folder = dirIt.next();
+        //int i=0;
+        if(folder.contains(dir_keys.at(0))){
+            folder= folder.remove(dir_keys.at(0));
+            dbManager->SetEnvVar(g4_ds_env_var.at(0),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(0)).arg(folder));
+
+        }
+
+        else if(folder.contains(dir_keys.at(1)) && folder.contains("RadioactiveDecay")){
+            folder= folder.remove(dir_keys.at(1));
+            dbManager->SetEnvVar(g4_ds_env_var.at(1),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(1)).arg(folder));
+        }
+
+        else if(folder.contains(dir_keys.at(2))){
+            folder= folder.remove(dir_keys.at(2));
+            dbManager->SetEnvVar(g4_ds_env_var.at(2),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(2)).arg(folder));
+        }
+
+        else if(folder.contains(dir_keys.at(3))){
+            folder= folder.remove(dir_keys.at(3));
+            dbManager->SetEnvVar(g4_ds_env_var.at(3),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(3)).arg(folder));
+        }
+
+        else if(folder.contains(dir_keys.at(4))){
+            folder= folder.remove(dir_keys.at(4));
+            dbManager->SetEnvVar(g4_ds_env_var.at(4),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(4)).arg(folder));
+        }
+
+        else if(folder.contains(dir_keys.at(5))){
+            folder= folder.remove(dir_keys.at(5));
+            dbManager->SetEnvVar(g4_ds_env_var.at(5),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(5)).arg(folder));
+        }
+
+        else if(folder.contains(dir_keys.at(6))){
+            folder= folder.remove(dir_keys.at(6));
+            dbManager->SetEnvVar(g4_ds_env_var.at(6),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(6)).arg(folder));
+        }
+
+        else if(folder.contains(dir_keys.at(7))){
+            folder= folder.remove(dir_keys.at(7));
+            dbManager->SetEnvVar(g4_ds_env_var.at(7),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(7)).arg(folder));
+        }
+        else if(folder.contains(dir_keys.at(8))){
+            folder= folder.remove(dir_keys.at(8));
+            dbManager->SetEnvVar(g4_ds_env_var.at(8),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(8)).arg(folder));
+        }
+        else if(folder.contains(dir_keys.at(9)) && folder.contains("PhotonEvaporation")){
+            folder= folder.remove(dir_keys.at(9));
+            dbManager->SetEnvVar(g4_ds_env_var.at(9),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(9)).arg(folder));
+        }
+        else if(folder.contains(dir_keys.at(10))){
+            folder= folder.remove(dir_keys.at(10));
+            dbManager->SetEnvVar(g4_ds_env_var.at(10),folder);
+            output(QString("Setting %1 to %2").arg(g4_ds_env_var.at(10)).arg(folder));
+        }
+
+    }
+    //refresh
+    ui->db_type->setCurrentIndex(1);
+    ui->db_type->setCurrentIndex(0);
+
+
+    // G4_ENV_VARIABLE    FILE INSIDE THE FOLDER                  DATASET LOCATION
+    //0 G4PIIDATA          g4data/G4PII.1.3/G4PII1.3/pixe/alpha/l/pwba/l3-24.dat                                   /home/samuel/g4/g4-data/G4PII1.3
+    //1 G4RADIOACTIVEDATA  g4data/G4RadioactiveDecay.5.3/RadioactiveDecay5.3/z72.a185                             /home/samuel/g4/g4-data/RadioactiveDecay5.3
+    //2 G4REALSURFACEDATA  g4data/G4RealSurface.2.1.1/RealSurface2.1.1/RoughESRGrease_LUTR.dat                  /home/samuel/g4/g4-data/RealSurface2.1.1
+    //3 G4SAIDXSDATA       g4data/G4SAIDDATA.2.0/G4SAIDDATA2.0/pi0pi0.dat                                        /home/samuel/g4/g4-data/G4SAIDDATA2.0
+    //4 G4ENSDFSTATEDATA   g4data/G4ENSDFSTATE.2.2/G4ENSDFSTATE2.2/ENSDFSTATE.dat                            /home/samuel/g4/g4-data/G4ENSDFSTATE2.2
+    //5 G4INCLDATA         g4data/G4INCL.1.0/G4INCL1.0/table_radius_hfb.dat                            /home/samuel/g4/g4-data/G4INCL1.0
+    //6 G4ABLADATA         g4data/G4ABLA.3.1/G4ABLA3.1/frldm.dat                                     /home/samuel/g4/g4-data/G4ABLA3.1
+    //7 G4NEUTRONHPDATA    g4data/G4NDL.4.5/G4NDL4.5/ThermalScattering                                  /home/samuel/g4/g4-data/G4NDL4.5
+    //8 G4LEDATA           g4data/G4EMLOW.7.7/G4EMLOW7.7/comp/ce-cs-47.dat                              /home/samuel/g4/g4-data/G4EMLOW7.7
+    //9 G4LEVELGAMMADATA   g4data/G4PhotonEvaporation.5.3/PhotonEvaporation5.3/z65.a150                 /home/samuel/g4/g4-data/PhotonEvaporation5.3
+    //10 G4PARTICLEXSDATA   g4data/G4PARTICLEXS.2.0/G4PARTICLEXS2.0/alpha/inel34                           /home/samuel/g4/g4-data/G4PARTICLEXS2.0
+
+
 }
