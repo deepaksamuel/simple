@@ -7,13 +7,13 @@
             "gpsshapePlane": "XY plane",
             "ionA": 60,
             "ionZ": 27,
-            "nevents": 100,
+            "nevents": 100000,
             "particleSource": true,
-            "particleType": "mu-",
+            "particleType": "mu+",
             "posX": 0,
             "posY": 0,
             "posZ": 0,
-            "showevents": true,
+            "showevents": false,
             "sourceShape": "Point"
         },
         {
@@ -66,14 +66,14 @@
         },
         {
             "dim-0": 90,
-            "dim-1": 5,
+            "dim-1": 0.1,
             "dim-2": 90,
             "id": 1,
-            "magx": 1000,
+            "magx": 150,
             "magy": 0,
             "magz": 0,
             "objColor": "gray",
-            "objMaterial": "G4_AIR",
+            "objMaterial": "G4_Fe",
             "objMaterialFormula": "",
             "objMaterialProps": "",
             "objName": "Box-001",
@@ -88,7 +88,7 @@
         },
         {
             "dim-0": 90,
-            "dim-1": 1,
+            "dim-1": 0.1,
             "dim-2": 90,
             "id": 2,
             "magx": 0,
@@ -110,7 +110,7 @@
         },
         {
             "dim-0": 90,
-            "dim-1": 1,
+            "dim-1": 0.1,
             "dim-2": 90,
             "id": 3,
             "magx": 0,
@@ -131,10 +131,10 @@
             "rotz": 0
         }
     ],
-    "physics": "FTFP_BERT",
+    "physics": "Muon decay with spin",
     "record": [
         {
-            "filterParticleIds": "",
+            "filterParticleIds": "-11",
             "recordEnergy": true,
             "recordMomentum": true,
             "recordPosition": true,
@@ -144,9 +144,9 @@
     ],
     "ui": [
         {
-            "active-out-widget": 0,
+            "active-out-widget": 3,
             "macro-script": "",
-            "scratch": ""
+            "scratch": "A simple simulation of Muon spin rotation\n\nA thin Iron plate with a magnetic field of 150 Gauss is kept in between two thin plates. \n\nMuons at rest are shot from the origin with the polarization along y axis.\n\nPlotting the globTime>>hx(1000) with the condition detectorId==\"Box-003\" shows the oscillations riding over the decay curve.\n\nThe Larmor frequency for muons is about 135 MHz/T which leads to 2 MHz oscillations for 150 Gauss, leading to about 0.5 us period, this was clearly seen in the demonstration\n"
         }
     ]
 }

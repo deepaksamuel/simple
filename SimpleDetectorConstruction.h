@@ -25,7 +25,7 @@
 //#include <G4GDMLParser.hh>
 #include "G4GlobalMagFieldMessenger.hh"
 #include "SimpleObject.h"
-
+#include "G4GDMLParser.hh"
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
@@ -40,7 +40,7 @@ public:
     void CreateEmptyWorld();
     void Draw(SimpleObject* obj);
     void SetObjectList(QList <SimpleObject*> objList);
-
+    void SetParser(QString fileName);
     QList <SimpleObject*> GetObjects() const {return objects;}
     void output(QString out){G4cout<<out.toLatin1().data();}
     void appendData(const G4Step *step, ulong event_id) const;
@@ -64,6 +64,8 @@ private:
     G4VPhysicalVolume* physWorld;
     G4String current_volume_name;
     bool save_position, save_energy, save_momentum, save_time, save_process;
+    bool is_gdml;
+    G4GDMLParser parser;
 };
 
 

@@ -33,7 +33,7 @@
 
 SimpleDetectorConstruction::SimpleDetectorConstruction() : G4VUserDetectorConstruction()
 {
-
+    is_gdml = false;
 }
 
 SimpleDetectorConstruction::~SimpleDetectorConstruction()
@@ -44,6 +44,7 @@ SimpleDetectorConstruction::~SimpleDetectorConstruction()
 
 void SimpleDetectorConstruction::CreateEmptyWorld()
 {
+    is_gdml = false;
     G4NistManager* nist = G4NistManager::Instance();
     G4Material* world_mat = nist->FindOrBuildMaterial("G4_AIR");
 
@@ -64,6 +65,7 @@ void SimpleDetectorConstruction::CreateEmptyWorld()
 
 void SimpleDetectorConstruction::SetObjectList(QList<SimpleObject *> objList)
 {
+    is_gdml = false;
     objects = objList;
     sensitiveVolumes.clear();
     foreach(SimpleObject* o, objects){
@@ -168,38 +170,45 @@ void SimpleDetectorConstruction::Draw(SimpleObject *obj)
 
 }
 
+void SimpleDetectorConstruction::SetParser(QString fileName)
+{
+    is_gdml=true;
+    parser.Read(fileName.toLatin1().data());
+}
 
 G4VPhysicalVolume* SimpleDetectorConstruction::Construct()
 {
 
-    G4GeometryManager::GetInstance()->OpenGeometry();
-    G4PhysicalVolumeStore::GetInstance()->Clean();
-    G4LogicalVolumeStore::GetInstance()->Clean();
-    G4SolidStore::GetInstance()->Clean();
-    G4RunManager::GetRunManager()->PhysicsHasBeenModified();
-
-
-    if(objects.count()==0){ //create an empty box if nothing is present
-        // G4cout<<"No world volume found!";
-        CreateEmptyWorld();
+    if(is_gdml){
+        qDebug()<<"Constructing shapes from GDML file...";
+        return parser.GetWorldVolume();
     }
-
-
     else{
-        //qDebug()<<"Number of objects"<<objects.count();
-        bool magFieldChanged=false;
-        for(int ii=0; ii<objects.count(); ii++){
-            SimpleObject* obj = objects.at(ii);
-            if(magFieldChanged==false)
-                magFieldChanged=obj->magFieldChanged();
-            Draw(obj);
-            //if(ii<100)
-                print(obj);
+        G4GeometryManager::GetInstance()->OpenGeometry();
+        G4PhysicalVolumeStore::GetInstance()->Clean();
+        G4LogicalVolumeStore::GetInstance()->Clean();
+        G4SolidStore::GetInstance()->Clean();
+        G4RunManager::GetRunManager()->PhysicsHasBeenModified();
+        if(objects.count()==0){ //create an empty box if nothing is present
+            // G4cout<<"No world volume found!";
+            CreateEmptyWorld();
         }
-        if(magFieldChanged) // do this only if magnetic field changed
-            setMagneticFields();
+        else{
+            //qDebug()<<"Number of objects"<<objects.count();
+            bool magFieldChanged=false;
+            for(int ii=0; ii<objects.count(); ii++){
+                SimpleObject* obj = objects.at(ii);
+                if(magFieldChanged==false)
+                    magFieldChanged=obj->magFieldChanged();
+                Draw(obj);
+                //if(ii<100)
+                print(obj);
+            }
+            if(magFieldChanged) // do this only if magnetic field changed
+                setMagneticFields();
+        }
+        return physWorld;
     }
-    return physWorld;
 
 
 }

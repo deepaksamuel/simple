@@ -8,6 +8,9 @@ and put them all in the same location
 Run the command
 
 ./linuxdeploy-centos6-x86_64.AppImage --appdir=/home/samuel/simple-app --output appimage --plugin qt
+(or)
+./linuxdeploy-x86_64.AppImage --appdir=/home/samuel/simple-app --output appimage --plugin qt
+
 for creating the appImage.
 simple-app is the directory inside which the "appimage" directory structure will be automatically created.
 The first time this is executed, it will result in an error but no worries.

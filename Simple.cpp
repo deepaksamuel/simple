@@ -35,6 +35,7 @@
 #include <physics_lists/PhysicsList_MuDecayWithSpin.hh>
 #include <G4OpticalPhysics.hh>
 #include "FTFP_BERT.hh"
+#include "G4GDMLParser.hh"
 
 
 Simple::Simple(int argc, char *argv[],QWidget *parent) :
@@ -879,7 +880,9 @@ void Simple::on_addObject_clicked()
 void Simple::UpdateGeometry()
 {
     SimpleDetectorConstruction* detector = (SimpleDetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
+    if(!is_gdml)
     detector->SetObjectList(objectList);
+
     G4RunManager::GetRunManager()->ReinitializeGeometry(); //Add here this line
     G4RunManager::GetRunManager()->GeometryHasBeenModified(); //
     //UImanager->ApplyCommand("/control/execute visupdate.mac");
@@ -2107,47 +2110,57 @@ void Simple::SetGunParameters(QJsonObject jsonObject)
 
 void Simple::on_actionOpen_triggered()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Save File"),
+    QString fileName = QFileDialog::getOpenFileName(this, tr("open geometry files"),
                                                     QDir::currentPath(),
-                                                    tr("Simulation Files (*.sim)"));
+                                                    tr("Simulation Files (*.sim);;GDML files (*.gdml)"));
 
-    if(!fileName.contains(".sim"))
-        fileName.append(".sim");
+    //    if(!fileName.contains(".sim"))
+    //        fileName.append(".sim");
 
-    QFile openFile(fileName);
-
-    if (!openFile.open(QIODevice::ReadOnly)) {
-        qWarning("Couldn't open save file.");
-        return ;
+    if(fileName.contains(".gdml")){
+        is_gdml=true;
+        SimpleDetectorConstruction* detector = (SimpleDetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
+        detector->SetParser(fileName);
+        UpdateGeometry();
     }
 
-    QByteArray data = openFile.readAll();
+    else{
+        is_gdml=false;
+        QFile openFile(fileName);
+        if (!openFile.open(QIODevice::ReadOnly)) {
+            qWarning("Couldn't open save file.");
+            return ;
+        }
 
-    QJsonDocument loadDoc(QJsonDocument::fromJson(data));
-    QJsonObject json = loadDoc.object();
+        QByteArray data = openFile.readAll();
 
-    if(json["physics"].toString()!=currentPhysicsList)
-    {
-        QMessageBox msgBox;
-        QString err = QString("This project was saved with the %1 physics list but the current physics list is %2.\nPlease restart the program to change the physics list.").arg(json["physics"].toString()).arg(currentPhysicsList);
-        msgBox.setText(err);
-        msgBox.exec();
+        QJsonDocument loadDoc(QJsonDocument::fromJson(data));
+        QJsonObject json = loadDoc.object();
+
+        if(json["physics"].toString()!=currentPhysicsList)
+        {
+            QMessageBox msgBox;
+            QString err = QString("This project was saved with the %1 physics list but the current physics list is %2.\nPlease restart the program to change the physics list.").arg(json["physics"].toString()).arg(currentPhysicsList);
+            msgBox.setText(err);
+            msgBox.exec();
+        }
+
+
+        ui->objectTree->clear();
+        ui->meshes->clear();
+        objectList.clear();
+        meshList.clear();
+
+
+        AddObject(json);
+        SetRecordParameters(json);
+        SetUIParameters(json);
+        SetGunParameters(json);
+
+        openFile.close();
+        last_opened_file = fileName;
+
     }
-
-
-    ui->objectTree->clear();
-    ui->meshes->clear();
-    objectList.clear();
-    meshList.clear();
-
-
-    AddObject(json);
-    SetRecordParameters(json);
-    SetUIParameters(json);
-    SetGunParameters(json);
-
-    openFile.close();
-    last_opened_file = fileName;
     setWindowTitle(QString("Simple (%1)").arg(fileName));
 
 
@@ -2409,7 +2422,7 @@ void Simple::on_auto_search_g4variables_clicked()
 
     QStringList dir_keys{"pixe/alpha/l/pwba/l3-24.dat","z72.a185","RoughESRGrease_LUTR.dat","pi0pi0.dat","ENSDFSTATE.dat","table_radius_hfb.dat","frldm.dat","ThermalScattering/Coherent/FS/al_metal.z","livermore/comp/ce-cs-47.dat","z65.a150","alpha/inel34"};
     QStringList g4_ds_env_var{"G4PIIDATA","G4RADIOACTIVEDATA","G4REALSURFACEDATA","G4SAIDXSDATA","G4ENSDFSTATEDATA","G4INCLDATA","G4ABLADATA","G4NEUTRONHPDATA","G4LEDATA","G4LEVELGAMMADATA","G4PARTICLEXSDATA"};
-   // QStringList g4_ds_env_paths;
+    // QStringList g4_ds_env_paths;
 
 
     // we search for the keys in the folder and retrieve the folder name. This will ensure that this works even if the version of the dataset changes
@@ -2499,6 +2512,23 @@ void Simple::on_auto_search_g4variables_clicked()
     //8 G4LEDATA           g4data/G4EMLOW.7.7/G4EMLOW7.7/comp/ce-cs-47.dat                              /home/samuel/g4/g4-data/G4EMLOW7.7
     //9 G4LEVELGAMMADATA   g4data/G4PhotonEvaporation.5.3/PhotonEvaporation5.3/z65.a150                 /home/samuel/g4/g4-data/PhotonEvaporation5.3
     //10 G4PARTICLEXSDATA   g4data/G4PARTICLEXS.2.0/G4PARTICLEXS2.0/alpha/inel34                           /home/samuel/g4/g4-data/G4PARTICLEXS2.0
+
+
+}
+
+void Simple::on_actionExport_triggered()
+{
+    G4GDMLParser parser;
+    parser.SetRegionExport(true);
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Export to GDML format..."),                           "",
+                                                    tr("(*.gdml)"));
+    if(!fileName.contains(".gdml"))
+        fileName = fileName+(".gdml");
+
+    parser.Write(fileName.toLatin1().data(),G4TransportationManager::GetTransportationManager()->GetNavigatorForTracking()->GetWorldVolume()->GetLogicalVolume());
+
+
+
 
 
 }

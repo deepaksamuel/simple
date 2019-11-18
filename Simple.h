@@ -268,6 +268,8 @@ private slots:
 
     void on_auto_search_g4variables_clicked();
 
+    void on_actionExport_triggered();
+
 private:
     Ui::Simple *ui;
     G4UImanager* UImanager;
@@ -305,6 +307,7 @@ private:
     bool is_user_physics_list;
     bool is_vis_disabled;
     bool is_first_time_use;
+    bool is_gdml;
 
 
 
