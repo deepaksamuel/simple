@@ -79,6 +79,11 @@ public:
         else
             return "";
     }
+    QString get_output_file_name(){
+        QString s = QString("temp-%1-%2.root").arg(scoring_qty).arg(mesh_name);
+        return s;
+    }
+
     QStringList GetScoringFilterCommands(bool chargeParticle, bool neutralParticle, bool pid, QString p_id, bool ke, double min_ke, double max_ke);
     QJsonObject jsonobject(){return jsonObject;}
 

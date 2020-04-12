@@ -24,7 +24,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="resources.qrc">
-    <normaloff>:/icons/icons/S.png</normaloff>:/icons/icons/S.png</iconset>
+    <normaloff>:/icons/icons/simple.png</normaloff>:/icons/icons/simple.png</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -707,6 +707,16 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_10"/>
         </widget>
+        <widget class="QWidget" name="tab_10">
+         <attribute name="title">
+          <string>File explorer</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <widget class="QTreeView" name="fileDirectoryView"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
        <widget class="QTabWidget" name="tabWidget1">
         <property name="sizePolicy">
@@ -737,19 +747,6 @@
          <layout class="QVBoxLayout" name="verticalLayout_8">
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_25">
-            <item>
-             <spacer name="horizontalSpacer_43">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item>
              <widget class="QLineEdit" name="filterString">
               <property name="placeholderText">
@@ -811,6 +808,31 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QPushButton" name="show_file_explorer">
+              <property name="font">
+               <font>
+                <family>Ubuntu Condensed</family>
+                <pointsize>8</pointsize>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(32, 74, 135);
+</string>
+              </property>
+              <property name="text">
+               <string>File explorer</string>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/icons/icons/folder.png</normaloff>:/icons/icons/folder.png</iconset>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
            </layout>
           </item>
           <item>
@@ -818,7 +840,6 @@
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>
-            <widget class="QTreeView" name="fileDirectoryView"/>
             <widget class="QTableView" name="worksheetView">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -2145,7 +2166,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                <x>0</x>
                <y>0</y>
                <width>1406</width>
-               <height>226</height>
+               <height>207</height>
               </rect>
              </property>
              <attribute name="label">
@@ -2238,6 +2259,19 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                   </property>
                   <property name="text">
                    <string>Auto search</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="auto_search_cvmfs">
+                  <property name="maximumSize">
+                   <size>
+                    <width>65</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Use CVMFS</string>
                   </property>
                  </widget>
                 </item>

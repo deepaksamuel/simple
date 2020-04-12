@@ -1,0 +1,24 @@
+/run/initialize
+/vis/viewer/set/autoRefresh true
+/vis/drawVolume
+/vis/viewer/set/viewpointVector -1 0 1
+/vis/viewer/set/viewpointThetaPhi 120 150
+/vis/viewer/set/lightsVector -1 0 0
+#/vis/viewer/set/style wireframe
+/vis/viewer/set/auxiliaryEdge true
+/vis/viewer/set/lineSegmentsPerCircle 100
+/vis/scene/add/scale   # Simple scale line
+/vis/scene/add/axes    # Simple axes: x=red, y=green, z=blue.
+/vis/scene/add/eventID # Drawn at end of event
+/vis/scene/add/trajectories smooth
+/vis/scene/endOfEventAction accumulate 100
+/vis/modeling/trajectories/create/drawByCharge
+/vis/modeling/trajectories/drawByCharge-0/default/setDrawStepPts true
+/vis/modeling/trajectories/drawByCharge-0/default/setStepPtsSize 2
+/vis/scene/add/hits
+
+#/vis/scene/endOfEventAction accumulate
+
+/vis/geometry/set/visibility World 0 true
+/vis/ogl/set/displayListLimit 5000000000
+#/vis/viewer/flush

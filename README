@@ -1,9 +1,12 @@
+Latest update:
+Run the create-app file: source create-app and the app is automatically created
+
+//Old instructions:
 Download from https://github.com/linuxdeploy
 a) linuxdeploy
 b) linuxdeploy-plugin-qt
 c) linuxdeploy-plugin-appimage
 and put them all in the same location
-
 
 Run the command
 
@@ -18,7 +21,7 @@ Next,
 a) in the bin folder,put the simple executable
 b) in the applcations folder put the simple.desktop file
 c) in the 256x256 folder put the simple.png file
-d) copy the xcbglintegrations plugin folder from the system (/usr/lib/x86_64-linux-gnu/qt5/plugins) to the plugin folder
+d) copy the xcbglintegrations plugin folder from the system (/usr/lib/x86_64-linux-gnu/qt5/plugins) to the plugins folder (inside /usr)
 e) most of the root folders (etc, bin, lib, fonts, include etc...) should also be copied inside the usr folder
 
 Run the command again.

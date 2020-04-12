@@ -1,0 +1,77 @@
+#!/bin/bash
+
+echo "Make sure the following files exist with executable permissions is the same directory as this script"
+echo "a) linuxdeploy-plugin-appimage-x86_64.AppImage"
+echo "b) linuxdeploy-plugin-qt-x86_64.AppImage"
+echo "c) linuxdeploy-x86_64.AppImage"
+ls
+echo "Removing old directory..."
+rm -r simple-app
+
+FILE=linuxdeploy-plugin-appimage-x86_64.AppImage
+if test ! -f "$FILE"; then
+    echo "$FILE does not exist!"
+    return
+fi
+
+FILE=linuxdeploy-plugin-qt-x86_64.AppImage
+if test ! -f "$FILE"; then
+    echo "$FILE does not exist!"
+    return
+fi
+FILE=linuxdeploy-x86_64.AppImage
+if test ! -f "$FILE"; then
+    echo "$FILE does not exist!"
+    return
+fi
+
+FILE=app-files/simple.png
+if test ! -f "$FILE"; then
+    echo "$FILE does not exist!"
+    return
+fi
+
+FILE=app-files/simple.desktop
+if test ! -f "$FILE"; then
+    echo "$FILE does not exist!"
+    return
+fi
+
+echo "The app will be created in the folder: simple-app"
+
+#dummy run of linux-deply just to create the folder structure
+./linuxdeploy-x86_64.AppImage --appdir=simple-app --output appimage --plugin qt
+
+cp app-files/simple.png simple-app/usr/share/icons/hicolor/256x256
+cp app-files/simple.desktop simple-app/usr/share/applications
+
+
+if [ ! -d "/usr/lib/x86_64-linux-gnu/qt5/plugins" ] 
+then
+    echo "Qt plugin directory does not exist on your filesystem at /usr/lib/x86_64-linux-gnu/qt5/plugins."
+    return
+fi
+cp -r /usr/lib/x86_64-linux-gnu/qt5/plugins/ simple-app/usr
+cp ../simple simple-app/usr/bin
+
+
+echo "Checking if ROOT is configured..."
+
+
+if [ -z "$ROOTSYS" ]
+then
+      echo "\$ROOTSYS is empty"
+      return	
+else
+      echo "ROOT found at: $ROOTSYS"
+      cp -r $ROOTSYS/etc simple-app/usr
+      cp -r $ROOTSYS/fonts simple-app/usr
+      cp -r $ROOTSYS/include simple-app/usr
+      cp -r $ROOTSYS/icons simple-app/usr
+      cp -r $ROOTSYS/lib simple-app/usr
+      cp -r $ROOTSYS/bin simple-app/usr
+      	
+fi
+
+#real run of linux-deply just to create the folder structure
+./linuxdeploy-x86_64.AppImage --appdir=simple-app --output appimage --plugin qt

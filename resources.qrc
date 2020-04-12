@@ -13,6 +13,7 @@
         <file>icons/filter.png</file>
         <file>icons/save.png</file>
         <file>icons/simple-banner.png</file>
-        <file>icons/S.png</file>
+        <file>icons/folder.png</file>
+        <file>icons/simple.png</file>
     </qresource>
 </RCC>

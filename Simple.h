@@ -270,6 +270,10 @@ private slots:
 
     void on_actionExport_triggered();
 
+    void on_show_file_explorer_clicked();
+
+    void on_auto_search_cvmfs_clicked();
+
 private:
     Ui::Simple *ui;
     G4UImanager* UImanager;

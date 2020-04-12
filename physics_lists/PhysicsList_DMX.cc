@@ -67,6 +67,8 @@
 
 #include "G4ios.hh"
 #include "G4UserLimits.hh"
+#include "G4ChipsKaonPlusInelasticXS.hh"
+#include "G4ChipsKaonZeroInelasticXS.hh"
 
 // Constructor /////////////////////////////////////////////////////////////
 PhysicsList_DMX::PhysicsList_DMX() : G4VUserPhysicsList() 
