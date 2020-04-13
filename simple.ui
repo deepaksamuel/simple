@@ -968,7 +968,7 @@
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="documentMode">
          <bool>false</bool>
@@ -1042,7 +1042,7 @@
 font: 8pt &quot;Ubuntu Condensed&quot;;</string>
             </property>
             <property name="currentIndex">
-             <number>1</number>
+             <number>2</number>
             </property>
             <widget class="QWidget" name="page_12">
              <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -1232,7 +1232,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                      <number>5</number>
                     </property>
                     <property name="maximum">
-                     <number>150</number>
+                     <number>300</number>
                     </property>
                     <property name="value">
                      <number>60</number>
@@ -3271,25 +3271,110 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
+  <tabstop>sel_sourceType</tabstop>
+  <tabstop>shapesList</tabstop>
+  <tabstop>objMaterial</tabstop>
+  <tabstop>objColor</tabstop>
+  <tabstop>addObject</tabstop>
+  <tabstop>particleSource</tabstop>
+  <tabstop>particleType</tabstop>
+  <tabstop>ionSource</tabstop>
+  <tabstop>ion_z</tabstop>
+  <tabstop>ion_A</tabstop>
+  <tabstop>sourceShape</tabstop>
+  <tabstop>gpsShapePlane</tabstop>
+  <tabstop>dimX</tabstop>
+  <tabstop>dimY</tabstop>
+  <tabstop>dimZ</tabstop>
+  <tabstop>posX</tabstop>
+  <tabstop>posY</tabstop>
+  <tabstop>posZ</tabstop>
+  <tabstop>nEvents</tabstop>
   <tabstop>shoot</tabstop>
-  <tabstop>objectPropertiesTable</tabstop>
-  <tabstop>sceneTreeWidget</tabstop>
-  <tabstop>fViewerTabWidget</tabstop>
-  <tabstop>fCommandArea</tabstop>
-  <tabstop>add_envVar</tabstop>
+  <tabstop>showTracks</tabstop>
+  <tabstop>angulardist</tabstop>
+  <tabstop>dirx</tabstop>
+  <tabstop>diry</tabstop>
+  <tabstop>sigma</tabstop>
+  <tabstop>dirz</tabstop>
+  <tabstop>theta_min</tabstop>
+  <tabstop>phi_min</tabstop>
+  <tabstop>theta_max</tabstop>
+  <tabstop>phi_max</tabstop>
+  <tabstop>eSpectType</tabstop>
+  <tabstop>espectParam1</tabstop>
+  <tabstop>espectParam2</tabstop>
+  <tabstop>espectParam3</tabstop>
+  <tabstop>emin</tabstop>
+  <tabstop>emax</tabstop>
+  <tabstop>polx</tabstop>
+  <tabstop>poly</tabstop>
+  <tabstop>polz</tabstop>
+  <tabstop>plotString</tabstop>
+  <tabstop>cutString</tabstop>
+  <tabstop>plot_options</tabstop>
+  <tabstop>setLogX</tabstop>
+  <tabstop>setLogY</tabstop>
+  <tabstop>plot</tabstop>
+  <tabstop>fitfunction</tabstop>
+  <tabstop>fit</tabstop>
   <tabstop>del_env_var</tabstop>
-  <tabstop>update_env_var</tabstop>
-  <tabstop>db_type</tabstop>
   <tabstop>envTable</tabstop>
   <tabstop>outtabWidget</tabstop>
   <tabstop>out</tabstop>
-  <tabstop>recordPosition</tabstop>
   <tabstop>recordTiming</tabstop>
-  <tabstop>recordEnergy</tabstop>
-  <tabstop>recordMomentum</tabstop>
   <tabstop>recordProcessName</tabstop>
   <tabstop>filterParticleIds</tabstop>
+  <tabstop>recordPosition</tabstop>
+  <tabstop>recordEnergy</tabstop>
+  <tabstop>recordMomentum</tabstop>
+  <tabstop>neutral_filter</tabstop>
+  <tabstop>switch_off_mag_fields</tabstop>
+  <tabstop>ke_filter</tabstop>
+  <tabstop>sceneTreeWidget</tabstop>
+  <tabstop>objectPropertiesTable</tabstop>
+  <tabstop>charge_filter</tabstop>
+  <tabstop>scoring_ke_max</tabstop>
+  <tabstop>scoring_ke_min</tabstop>
+  <tabstop>scoring_pid_filter</tabstop>
+  <tabstop>add_cylindrical_mesh</tabstop>
+  <tabstop>scoringParameter</tabstop>
+  <tabstop>particle_id_filter</tabstop>
+  <tabstop>add_box_mesh</tabstop>
+  <tabstop>meshes</tabstop>
+  <tabstop>tabWidget1</tabstop>
+  <tabstop>clear_all_mesh</tabstop>
+  <tabstop>fileDirectoryView</tabstop>
+  <tabstop>scoring_table_view</tabstop>
+  <tabstop>fViewerTabWidget</tabstop>
   <tabstop>objectTree</tabstop>
+  <tabstop>sel_energyDist</tabstop>
+  <tabstop>sel_angDist</tabstop>
+  <tabstop>hide_gunStack</tabstop>
+  <tabstop>fCommandArea</tabstop>
+  <tabstop>auto_search_g4variables</tabstop>
+  <tabstop>auto_search_cvmfs</tabstop>
+  <tabstop>download_g4_data_files</tabstop>
+  <tabstop>addNewMaterial</tabstop>
+  <tabstop>hide_g4_messages</tabstop>
+  <tabstop>clearOutput</tabstop>
+  <tabstop>filterString</tabstop>
+  <tabstop>filterDataframe</tabstop>
+  <tabstop>export_dataframe</tabstop>
+  <tabstop>worksheetView</tabstop>
+  <tabstop>isWireframe</tabstop>
+  <tabstop>add_envVar</tabstop>
+  <tabstop>macros</tabstop>
+  <tabstop>run_macro</tabstop>
+  <tabstop>scratch</tabstop>
+  <tabstop>output_directory</tabstop>
+  <tabstop>select_directory</tabstop>
+  <tabstop>show_output_directory</tabstop>
+  <tabstop>fileList</tabstop>
+  <tabstop>update_env_var</tabstop>
+  <tabstop>db_type</tabstop>
+  <tabstop>ploterror</tabstop>
+  <tabstop>show_file_explorer</tabstop>
  </tabstops>
  <resources>
   <include location="resources.qrc"/>
