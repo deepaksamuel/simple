@@ -19,6 +19,7 @@
 #include <QMdiSubWindow>
 #include <iROOTWorksheet.h>
 #include <QFileDialog>
+#include <TGraph.h>
 #include <SimpleStoredVis.h>
 #include <G4OpenGLStoredViewer.hh>
 #include <G4Qt.hh>
@@ -37,6 +38,7 @@
 #include "FTFP_BERT.hh"
 #include "G4GDMLParser.hh"
 #include <QInputDialog>
+#include <QDateTime>
 
 Simple::Simple(int argc, char *argv[],QWidget *parent) :
     QMainWindow(parent),
@@ -65,12 +67,18 @@ Simple::Simple(int argc, char *argv[],QWidget *parent) :
         }
         InitRoot();
         CreateMenus();
+
     }
     else{
 
     }
 
     g4started=true;
+    ui->toolBox->setCurrentIndex(0);
+    if(recent_file!="") // open recent file, if the user has chosen one
+    {
+        OpenFile(recent_file);
+    }
 }
 
 void Simple::CreateMenus()
@@ -147,18 +155,46 @@ int Simple::InitDB()
         return -1;
     }
     else {
-        if(dbManager->GetListOfShapes().count()==0) {// this is an indication that we are not able to access the db file, probably it is not in the right place!
+        if(dbManager->GetListOfEnvVarValues().count()==0) {// this is an indication that we are not able to access the db file, probably it is not in the right place!
             QMessageBox::information(this, tr("No database files found"),
-                                     tr("The database file db.sqlite, usually placed next to the application, is missing or empty."));
+                                     tr("The database file db.sqlite, usually placed next to the application, is missing or empty. Please download it from repository!"));
             return -2;
+            //exit(-2);
         }
         else{
+            // test if this database file corresponds to your system!
+            QStringList sl= dbManager->GetListOfEnvVarValues();
 
-            //    output("Done!","success");
-            //            qDebug()<<dbManager->GetListOfElements();
-            //            qDebug()<<dbManager->GetListOfElementSymbols();
-            //            qDebug()<<dbManager->GetListOfZ();
-            //            qDebug()<<dbManager->GetListOfAtomicMass();
+            foreach(QString s, sl){
+                QDir d(s);
+                if(!d.exists()){
+                    qDebug()<<"Invalid directory location in database file:"<<d;
+                    QMessageBox::information(this, tr("Invalid directory locations..."),
+                                             tr("Some of the directory locations in the database are incorrect, please verify in settings!"));
+                    //return 0;
+                }
+            }
+
+            // check for output directory
+
+            QString out_dir = dbManager->GetEnvVar("OUTPUTDIR");
+            qDebug()<<"Output directory set to: "<<out_dir;
+            QDir out(out_dir);
+            if(!out.exists() || out_dir==""){
+                qDebug()<<"Output directory does not exist, creating default data directory next to the application!";
+                //                  QMessageBox::information(this, tr("Invalid output directory"),
+                //                                           tr("Creating new output directory named 'data'!"));
+
+                //QDir d;
+                out.mkdir("data");
+                set_output_directory(QDir::currentPath()+"/data");
+            }
+            else{
+                set_output_directory(out_dir);
+            }
+
+
+
 
 
             return 0;
@@ -208,7 +244,7 @@ void Simple::InitEnvVars()
     }
 
     output("If you are using the application for the first time, you may have to check if the locations are right in settings","warn");
-
+    run_id=0;
 }
 
 
@@ -224,11 +260,12 @@ void Simple::InitPhysicsLists()
 
     refPhysicsNames = dbManager->GetListOfRefPhysics();
     refPhysicsHints = dbManager->GetListOfRefPhysicsHints();
-    PhysicsListDialog* dialog = new PhysicsListDialog(this);
+    PhysicsListDialog* dialog = new PhysicsListDialog(this,dbManager);
 
     dialog->SetContents(refPhysicsNames,refPhysicsHints);
     dialog->exec();
     currentPhysicsList = dialog->GetSelectedPhysicsList();
+    recent_file = dialog->GetRecentFile();
     nThreads = dialog->GetNumberofThreads();
     is_vis_disabled = dialog->isVisDisabled();
 
@@ -309,17 +346,18 @@ void Simple::InitUI()
 {
     // make a data directory if it did not exist
     ui->progressBar->hide();
-    QDir dir(QDir::currentPath());
-    dir.mkdir("data");
+    //    QDir dir(QDir::currentPath());
+    //    dir.mkdir("data");
 
-    // remove file with prefix "temp-" so that they can be overwritten
-    dir.cd("data");
-    QFileInfoList l = dir.entryInfoList();
-    foreach(QFileInfo file, l){
-        qDebug()<<file.fileName();
-        if(file.fileName().contains("temp-"));
-        dir.remove(file.fileName());
-    }
+    //    // remove file with prefix "temp-" so that they can be overwritten
+    //    dir.cd("data");
+    //    QFileInfoList l = dir.entryInfoList();
+    //    foreach(QFileInfo file, l){
+    //        qDebug()<<file.fileName();
+    //        if(file.fileName().contains("simple-run"));
+    //        dir.remove(file.fileName());
+    //    }
+    // not deleting files, as they will be done by user. output directory will be set by user.
 
     ui->gunStack->hide();
     on_particleSource_toggled(true);
@@ -348,7 +386,8 @@ void Simple::InitUI()
     fileSystemModel->setNameFilters({"*.root"});
     fileSystemModel->setNameFilterDisables(false);
     ui->fileDirectoryView->setModel(fileSystemModel);
-    ui->fileDirectoryView->setRootIndex(fileSystemModel->index(qApp->applicationDirPath().append("/data/"))); // or use Current Index
+    //enable this to show only the data folder
+    //ui->fileDirectoryView->setRootIndex(fileSystemModel->index(qApp->applicationDirPath().append("/data/"))); // or use Current Index
 
     QList <int> size;
     size.append(250);
@@ -357,8 +396,9 @@ void Simple::InitUI()
 
     mat_builder = SimpleMaterialBuilder::getInstance();
     mat_builder->SetDataBaseManager(dbManager);
-
+    ui->toolBox->setCurrentIndex(0);
     ui->addNewMaterial->hide();
+    ui->ploterror->hide();
 }
 
 void Simple::InitRoot()
@@ -378,6 +418,7 @@ void Simple::InitRoot()
 
     QMdiSubWindow *subWindow = new QMdiSubWindow(this,Qt::FramelessWindowHint);
     iCanvas *widget = new iCanvas(subWindow);
+    canvas = widget;
     subWindow->setWidget(widget);
     ui->mdiArea->addSubWindow(subWindow);
     subWindow->showMaximized();
@@ -1124,10 +1165,22 @@ void Simple::on_db_type_currentIndexChanged(const QString &arg1)
     {
         db_table_model->setTable("env_vars");
         ui->addNewMaterial->hide();
+        ui->add_envVar->show();
+        ui->del_env_var->show();
+        ui->update_env_var->show();
+        ui->auto_search_g4variables->show();
+        ui->auto_search_cvmfs->show();
+        ui->download_g4_data_files->show();
     }
     else if (arg1=="Materials") {
         db_table_model->setTable("materials");
         ui->addNewMaterial->show();
+        ui->add_envVar->hide();
+        ui->del_env_var->hide();
+        ui->update_env_var->hide();
+        ui->auto_search_g4variables->hide();
+        ui->auto_search_cvmfs->hide();
+        ui->download_g4_data_files->hide();
     }
     db_table_model->select();
 }
@@ -1454,12 +1507,13 @@ QStringList Simple::CreateParticleSource(QString particle, QString sourceType, Q
 
 }
 
+
 void Simple::on_shoot_clicked()
 {
+    QApplication::setOverrideCursor(Qt::WaitCursor);
 
 
-    // ((GSRunAction*)(G4RunManager::GetRunManager()->GetUserRunAction()))->setRecordParameters(rp);
-
+    ui->fileList->clear();
     InitRecordParameters();
     InitScoringParameters();
     ui->gunStack->hide();
@@ -1549,17 +1603,55 @@ void Simple::on_shoot_clicked()
     commands.append(accm);
     //   commands.append(verbosity);
     commands.append(beamOn);
-    worksheet->SetCurrentFile("data/temp-det-output.root");
-    foreach(SimpleMesh* mesh, meshList){
-        mesh->writeToFile();
-    }
-    QCompleter *c = new QCompleter(worksheet->getHeader());
-    ui->plotString->setCompleter(c);
-    ui->cutString->setCompleter(c);
 
+    foreach(SimpleMesh* mesh, meshList){
+        mesh->writeToFile(mesh_file_prefix);
+    }
+    HandleOutputFiles();
+    QApplication::restoreOverrideCursor();
+    IncrementRunId();
 
 }
 
+// this will add the created output files to the combobox for dataframe
+void Simple::HandleOutputFiles()
+{
+
+    bool hasToRecord = false; // check if there are object which has to record data
+    foreach(SimpleMesh* mesh, meshList){
+        QString mesh_file_name = mesh->get_output_file_name();
+        if(mesh_file_name!=""){
+            //  if(hasToRecord==false){ // if no detector files are present then mesh files are opened automatically
+            worksheet->SetCurrentFile(mesh_file_name);
+            QCompleter *c = new QCompleter(worksheet->getHeader());
+            ui->plotString->setCompleter(c);
+            ui->cutString->setCompleter(c);
+            output_filelist.prepend(mesh_file_name);
+            // }
+        }
+    }
+    foreach(SimpleObject* o, objectList)
+    {
+        if(o->storeData()==true){
+            hasToRecord =true;
+            worksheet->SetCurrentFile(output_filename);
+            QCompleter *c = new QCompleter(worksheet->getHeader());
+            ui->plotString->setCompleter(c);
+            ui->cutString->setCompleter(c);
+            output_filelist.prepend(output_filename);
+            break;
+        }
+    }
+
+    // causes crashing if the files are removed while data is written
+    if(hasToRecord==false){ // if no objects have store_data enabled, delete the empty output file
+        //   QFile f(output_filename);
+        //   f.remove();
+        //   qDebug()<<"Deleting empty output file: "<<output_filename;
+    }
+    ui->fileList->addItems(output_filelist);
+
+}
 
 void Simple::Execute(QString command)
 {
@@ -1587,15 +1679,21 @@ void Simple::InitScoringParameters()
 void Simple::InitRecordParameters()
 {
     // delete previous temporary files.
-    QDir dir(QDir::current());
-    dir.mkdir("data");
-    dir.cd("data");
-    QFileInfoList l = dir.entryInfoList();
-    foreach(QFileInfo file, l){
-        qDebug()<<file.fileName();
-        if(file.fileName().contains("temp-"));
-        dir.remove(file.fileName());
-    }
+    //    QDir dir(QDir::current());
+    //    dir.mkdir("data");
+    //    dir.cd("data");
+    // Do not delete the data folder until the application is restarted. Since the user might be interested in analyzing all the files.
+    //    QFileInfoList l = dir.entryInfoList();
+    //    foreach(QFileInfo file, l){
+    //        qDebug()<<file.fileName();
+    //        if(file.fileName().contains("temp-"));
+    //        dir.remove(file.fileName());
+    //    }
+
+    output_filename = QString("%1/%2run%3-det-output.root").arg(ui->output_directory->text()).arg(QDateTime::currentDateTime().toString("yyyy.MM.dd.hh.mm.ss-")).arg(QString::number(run_id).rightJustified(3, '0'));
+    mesh_file_prefix = QString("%1/%2run%3-").arg(ui->output_directory->text()).arg(QDateTime::currentDateTime().toString("yyyy.MM.dd.hh.mm.ss-")).arg(QString::number(run_id).rightJustified(3, '0'));
+
+    ((SimpleRunAction*)(G4RunManager::GetRunManager()->GetUserRunAction()))->SetOutputFile(output_filename);
 
 
     foreach(SimpleObject* o, objectList)
@@ -1688,7 +1786,11 @@ void Simple::on_filterString_editingFinished()
 
 void Simple::on_plot_clicked()
 {
-    worksheet->PlotData(ui->plotString->text(),ui->cutString->text(),ui->plot_options->text());
+    ui->ploterror->hide();
+   if(worksheet->PlotData(ui->plotString->text(),ui->cutString->text(),ui->plot_options->text())<0)
+   {
+       ui->ploterror->show();
+   }
 }
 
 void Simple::on_plotString_returnPressed()
@@ -2032,6 +2134,11 @@ void Simple::on_actionSave_triggered()
         on_actionSave_as_triggered();
 }
 
+void Simple::IncrementRunId()
+{
+    run_id++;
+    ui->run_id->setText("Next Run Id:"+QString::number(run_id).rightJustified(3, '0'));
+}
 
 void Simple::SetRecordParameters(QJsonObject jsonObject)
 {
@@ -2110,15 +2217,37 @@ void Simple::SetGunParameters(QJsonObject jsonObject)
 
 }
 
-void Simple::on_actionOpen_triggered()
+QStringList Simple::GetRecentFileList()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("open geometry files"),
-                                                    QDir::currentPath(),
-                                                    tr("Simulation Files (*.sim);;GDML files (*.gdml)"));
+    QStringList files = dbManager->GetRecentFileList();
+    QStringList s;
+    foreach(QString file, files) {
+        QFile f(file);
+        if(f.exists()){
+            s.append(file);
+        }
+    }
+}
 
-    //    if(!fileName.contains(".sim"))
-    //        fileName.append(".sim");
+QString Simple::GetPhysicsList(QString fileName)
+{
+    QFile openFile(fileName);
+    if (!openFile.open(QIODevice::ReadOnly)) {
+        qWarning("Couldn't open file.");
+        return "-";
+    }
 
+    QByteArray data = openFile.readAll();
+
+    QJsonDocument loadDoc(QJsonDocument::fromJson(data));
+    QJsonObject json = loadDoc.object();
+    return json["physics"].toString();
+
+}
+
+
+void Simple::OpenFile(QString fileName)
+{
     if(fileName.contains(".gdml")){
         is_gdml=true;
         SimpleDetectorConstruction* detector = (SimpleDetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
@@ -2130,7 +2259,7 @@ void Simple::on_actionOpen_triggered()
         is_gdml=false;
         QFile openFile(fileName);
         if (!openFile.open(QIODevice::ReadOnly)) {
-            qWarning("Couldn't open save file.");
+            qWarning("Couldn't open file.");
             return ;
         }
 
@@ -2164,7 +2293,15 @@ void Simple::on_actionOpen_triggered()
 
     }
     setWindowTitle(QString("Simple (%1)").arg(fileName));
+    dbManager->AddToRecentFiles(fileName);
+}
 
+void Simple::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("open geometry files"),
+                                                    QDir::currentPath(),
+                                                    tr("Simulation Files (*.sim);;GDML files (*.gdml)"));
+    OpenFile(fileName);
 
 }
 
@@ -2315,6 +2452,7 @@ void Simple::on_actionMaterial_list_triggered()
     ui->fViewerTabWidget->setCurrentIndex(1);
     ui->toolBox->setCurrentIndex(0);
     ui->db_type->setCurrentIndex(0);
+
     on_db_type_currentIndexChanged(ui->db_type->itemText(1));
 }
 
@@ -2648,8 +2786,85 @@ void Simple::on_actionExport_triggered()
 
 }
 
+
+void Simple::set_output_directory(QString s)
+{
+    ui->output_directory->setText(s);
+    dbManager->SetEnvVar("OUTPUTDIR",s);
+    output_directory =s;
+}
+
 void Simple::on_show_file_explorer_clicked()
 {
     ui->sceneTreeWidget->setCurrentIndex(3);
 }
 
+
+void Simple::on_select_directory_clicked()
+{
+    QDir directory = QFileDialog::getExistingDirectory(this, tr("Open Directory"),"/home",QFileDialog::ShowDirsOnly| QFileDialog::DontResolveSymlinks);
+    set_output_directory(directory.absolutePath());
+
+}
+
+void Simple::on_db_type_currentIndexChanged(int index)
+{
+
+}
+
+void Simple::on_show_output_directory_clicked()
+{
+    ui->fileDirectoryView->setCurrentIndex(fileSystemModel->index(output_directory));
+    ui->fileDirectoryView->setExpanded(fileSystemModel->index("/"),true);
+    ui->fileDirectoryView->setExpanded(fileSystemModel->index(output_directory),true);
+}
+
+void Simple::on_clear_output_directory_clicked()
+{
+    //    QMessageBox::StandardButton reply;
+    //      reply = QMessageBox::question(this, "Delete", "Quit?",
+    //                                    QMessageBox::Yes|QMessageBox::No);
+    //      if (reply == QMessageBox::Yes) {
+    //        qDebug() << "Yes was clicked";
+    //        QApplication::quit();
+    //      } else {
+    //        qDebug() << "Yes was *not* clicked";
+    //      }
+}
+
+void Simple::on_fileList_currentIndexChanged(const QString &arg1)
+{
+    worksheet->SetCurrentFile(arg1);
+    QCompleter *c = new QCompleter(worksheet->getHeader());
+    ui->plotString->setCompleter(c);
+    ui->cutString->setCompleter(c);
+}
+
+void Simple::on_fit_clicked()
+{
+    QString fit=ui->fitfunction->currentText();
+    QStringList objs= canvas->GetListofFittableObjects();
+    foreach(QString s, objs)
+    {
+        QStringList a = s.split(" ");
+        if(a.count()==2){
+            QString objectName = a.at(1);
+            TObject* object  = gPad->FindObject(objectName.toLatin1().data());
+            TH1 *hist = dynamic_cast<TH1*> (object);
+            if(hist!=NULL){
+                gStyle->SetOptFit(1111);
+                gROOT->ForceStyle();
+                hist->Fit(fit.toLatin1().data());
+            }
+            else {
+                TGraph *graph = dynamic_cast<TGraph*> (object);
+                if(graph!=NULL){
+                    gStyle->SetOptFit(1111);
+                    gROOT->ForceStyle();
+                    graph->Fit(fit.toLatin1().data());
+                }
+            }
+        }
+    }
+    canvas->Refresh();
+}

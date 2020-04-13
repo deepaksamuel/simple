@@ -81,6 +81,68 @@ void SimpleDatabaseManager::SetEnvVar(QString name, QString path)
 
 }
 
+QString SimpleDatabaseManager::GetEnvVar(QString name)
+{
+    //QString dsnames;
+    QSqlQuery query;
+    QString command = QString("SELECT * FROM env_vars WHERE env_var='%1'").arg(name);
+    query.exec(command);
+    while (query.next()) {
+        QString ds = query.value(1).toString().trimmed();
+        return ds;
+
+        //int salary = query.value(1).toInt();
+        //qDebug() << name << salary;
+    }
+    return "";
+
+}
+
+QStringList SimpleDatabaseManager::GetRecentFileList()
+{
+    QStringList recent_files;
+    QSqlQuery query;
+    query.exec("SELECT * FROM recent_files");
+
+    while (query.next()) {
+        QString file = query.value(0).toString().trimmed();
+        //QString physics_list = query.value(0).toString().trimmed();
+        recent_files.append(file);
+
+        //int salary = query.value(1).toInt();
+        //qDebug() << name << salary;
+    }
+    return recent_files;
+}
+
+void SimpleDatabaseManager::AddToRecentFiles(QString file)
+{
+    QSqlQuery query;
+    QStringList s = GetRecentFileList();
+    if(!s.contains(file)){
+        QString sqlcommand = QString("INSERT INTO recent_files VALUES('%1','NA')").arg(file);
+        qDebug()<<sqlcommand;
+        query.exec(sqlcommand);
+    }
+}
+
+//QStringList SimpleDatabaseManager::GetRecentFilePhysicsList()
+//{
+//    QStringList dspaths;
+//    QSqlQuery query;
+//    query.exec("SELECT * FROM recent_files");
+
+//    while (query.next()) {
+//        QString dspath = query.value(0).toString().trimmed();
+//        dspaths.append(dspath);
+
+//        //int salary = query.value(1).toInt();
+//        //qDebug() << name << salary;
+//    }
+//    return dspaths;
+//}
+
+
 void SimpleDatabaseManager::InsertNewMaterial(QString name, QString formula)
 {
     QSqlQuery query;
@@ -290,17 +352,17 @@ QFormLayout* SimpleDatabaseManager::GetObjectSizeParametersForm(QString shapeNam
 
     QFormLayout *layout = new QFormLayout;
     for(int i=0;i<parNames.count();i++){
-    QDoubleSpinBox *val = new QDoubleSpinBox();
-    val->setMinimum(-99999999);
-    val->setMaximum(99999999);
-    val->setValue(defParValues.at(i));
-    //val->setObjectName(parNames.at(i));
-   // qDebug()<<defParValues.at(i);
-    layout->addRow(new QLabel(parNames.at(i)), val);
+        QDoubleSpinBox *val = new QDoubleSpinBox();
+        val->setMinimum(-99999999);
+        val->setMaximum(99999999);
+        val->setValue(defParValues.at(i));
+        //val->setObjectName(parNames.at(i));
+        // qDebug()<<defParValues.at(i);
+        layout->addRow(new QLabel(parNames.at(i)), val);
 
     }//layout->addRow(button2, lineEdit2);
     //layout->addRow(button3, lineEdit3);
-   return layout;
+    return layout;
 }
 
 QStringList SimpleDatabaseManager::GetListOfPositionParameters()
@@ -348,15 +410,15 @@ QFormLayout* SimpleDatabaseManager::GetObjectPositionParametersForm()
 
     QFormLayout *layout = new QFormLayout;
     for(int i=0;i<parNames.count();i++){
-    QDoubleSpinBox *val = new QDoubleSpinBox();
-    val->setMinimum(-99999999);
-    val->setMaximum(99999999);
-    val->setValue(defParValues.at(i));
-    //qDebug()<<defParValues.at(i);
-    layout->addRow(new QLabel(parNames.at(i)), val);
+        QDoubleSpinBox *val = new QDoubleSpinBox();
+        val->setMinimum(-99999999);
+        val->setMaximum(99999999);
+        val->setValue(defParValues.at(i));
+        //qDebug()<<defParValues.at(i);
+        layout->addRow(new QLabel(parNames.at(i)), val);
     }
 
-return layout;
+    return layout;
 }
 
 

@@ -713,7 +713,66 @@
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_12">
           <item>
-           <widget class="QTreeView" name="fileDirectoryView"/>
+           <widget class="QTreeView" name="fileDirectoryView">
+            <property name="alternatingRowColors">
+             <bool>true</bool>
+            </property>
+            <attribute name="headerMinimumSectionSize">
+             <number>100</number>
+            </attribute>
+            <attribute name="headerDefaultSectionSize">
+             <number>200</number>
+            </attribute>
+            <attribute name="headerStretchLastSection">
+             <bool>true</bool>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QPushButton" name="show_output_directory">
+              <property name="maximumSize">
+               <size>
+                <width>89</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <family>Ubuntu Condensed</family>
+                <pointsize>8</pointsize>
+                <weight>50</weight>
+                <italic>false</italic>
+                <bold>false</bold>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(32, 74, 135);</string>
+              </property>
+              <property name="text">
+               <string>Output directory</string>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>
@@ -745,6 +804,35 @@
           <string>Dataframe</string>
          </attribute>
          <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QLabel" name="label_3">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>Recent runs:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="fileList">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>16777215</height>
+             </size>
+            </property>
+           </widget>
+          </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_25">
             <item>
@@ -818,11 +906,10 @@
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">color: rgb(32, 74, 135);
-</string>
+               <string notr="true">color: rgb(32, 74, 135);</string>
               </property>
               <property name="text">
-               <string>File explorer</string>
+               <string>Show file explorer</string>
               </property>
               <property name="icon">
                <iconset resource="resources.qrc">
@@ -1963,10 +2050,33 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
 font: 8pt &quot;Ubuntu Condensed&quot;;</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_8">
+             <item row="1" column="6">
+              <widget class="QPushButton" name="shoot">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Condensed</family>
+                 <pointsize>8</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                 <underline>true</underline>
+                </font>
+               </property>
+               <property name="text">
+                <string>Shoot beam</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
              <item row="0" column="0">
               <spacer name="horizontalSpacer_14">
                <property name="orientation">
                 <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
                </property>
                <property name="sizeHint" stdset="0">
                 <size>
@@ -1975,20 +2085,6 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                 </size>
                </property>
               </spacer>
-             </item>
-             <item row="1" column="6">
-              <widget class="QCheckBox" name="showTracks">
-               <property name="text">
-                <string>show tracks</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="3">
-              <widget class="QLabel" name="label_9">
-               <property name="text">
-                <string>Number of events</string>
-               </property>
-              </widget>
              </item>
              <item row="1" column="4">
               <widget class="QSpinBox" name="nEvents">
@@ -2003,7 +2099,14 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="5">
+             <item row="1" column="8">
+              <widget class="QCheckBox" name="showTracks">
+               <property name="text">
+                <string>show tracks</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="6">
               <widget class="QPushButton" name="sel_energyDist">
                <property name="font">
                 <font>
@@ -2020,6 +2123,66 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                </property>
                <property name="flat">
                 <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="8">
+              <widget class="QPushButton" name="hide_gunStack">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Condensed</family>
+                 <pointsize>8</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                 <underline>true</underline>
+                </font>
+               </property>
+               <property name="text">
+                <string>Hide/Show</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="12">
+              <spacer name="horizontalSpacer_13">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="3">
+              <widget class="QPushButton" name="sel_sourceType">
+               <property name="font">
+                <font>
+                 <family>Ubuntu Condensed</family>
+                 <pointsize>8</pointsize>
+                 <weight>50</weight>
+                 <italic>false</italic>
+                 <bold>false</bold>
+                 <underline>true</underline>
+                </font>
+               </property>
+               <property name="text">
+                <string>Source</string>
+               </property>
+               <property name="flat">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLabel" name="label_9">
+               <property name="text">
+                <string>Number of events</string>
                </property>
               </widget>
              </item>
@@ -2043,80 +2206,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                </property>
               </widget>
              </item>
-             <item row="1" column="5">
-              <widget class="QPushButton" name="shoot">
-               <property name="font">
-                <font>
-                 <family>Ubuntu Condensed</family>
-                 <pointsize>8</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                 <underline>true</underline>
-                </font>
-               </property>
-               <property name="text">
-                <string>Shoot beam</string>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="6">
-              <widget class="QPushButton" name="hide_gunStack">
-               <property name="font">
-                <font>
-                 <family>Ubuntu Condensed</family>
-                 <pointsize>8</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                 <underline>true</underline>
-                </font>
-               </property>
-               <property name="text">
-                <string>Hide/Show</string>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QPushButton" name="sel_sourceType">
-               <property name="font">
-                <font>
-                 <family>Ubuntu Condensed</family>
-                 <pointsize>8</pointsize>
-                 <weight>50</weight>
-                 <italic>false</italic>
-                 <bold>false</bold>
-                 <underline>true</underline>
-                </font>
-               </property>
-               <property name="text">
-                <string>Source</string>
-               </property>
-               <property name="flat">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="8">
-              <spacer name="horizontalSpacer_13">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="1" column="7">
+             <item row="1" column="10">
               <widget class="QProgressBar" name="progressBar">
                <property name="minimumSize">
                 <size>
@@ -2135,6 +2225,13 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                </property>
                <property name="value">
                 <number>0</number>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="13">
+              <widget class="QLabel" name="run_id">
+               <property name="text">
+                <string>Run:000</string>
                </property>
               </widget>
              </item>
@@ -2158,7 +2255,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
           <item>
            <widget class="QToolBox" name="toolBox">
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="page_5">
              <property name="geometry">
@@ -2360,8 +2457,8 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>395</width>
-               <height>154</height>
+               <width>1392</width>
+               <height>223</height>
               </rect>
              </property>
              <attribute name="label">
@@ -2477,6 +2574,29 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
                </widget>
               </item>
               <item>
+               <widget class="QGroupBox" name="groupBox_8">
+                <property name="title">
+                 <string>Output directory</string>
+                </property>
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <widget class="QLineEdit" name="output_directory">
+                   <property name="readOnly">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="select_directory">
+                   <property name="text">
+                    <string>Select directory</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+              <item>
                <spacer name="verticalSpacer">
                 <property name="orientation">
                  <enum>Qt::Vertical</enum>
@@ -2561,7 +2681,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
          <enum>QTabWidget::Rounded</enum>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_7">
          <attribute name="title">
@@ -2651,6 +2771,32 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_26">
             <item>
+             <widget class="QPushButton" name="ploterror">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="toolTip">
+               <string>Error in plot string or cut string!</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="icon">
+               <iconset resource="resources.qrc">
+                <normaloff>:/icons/icons/warn.png</normaloff>:/icons/icons/warn.png</iconset>
+              </property>
+              <property name="autoDefault">
+               <bool>false</bool>
+              </property>
+              <property name="default">
+               <bool>false</bool>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QLineEdit" name="plotString">
               <property name="placeholderText">
                <string>plot string</string>
@@ -2699,6 +2845,90 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
               </property>
               <property name="text">
                <string>Plot</string>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="fitfunction">
+              <item>
+               <property name="text">
+                <string>gaus</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>expo</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>pol0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>pol1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>pol2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>pol3</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>landau</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>gausn</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>chebyshev0</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>chebyshev1</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>chebyshev2</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>chebyshev3</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="fit">
+              <property name="font">
+               <font>
+                <family>Ubuntu Condensed</family>
+                <pointsize>8</pointsize>
+                <underline>true</underline>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(32, 74, 135);</string>
+              </property>
+              <property name="text">
+               <string>Fit</string>
               </property>
               <property name="flat">
                <bool>true</bool>

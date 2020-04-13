@@ -31,6 +31,7 @@ public:
     QStringList GetListOfEnvVars();
     QStringList GetListOfEnvVarValues();
     void SetEnvVar(QString name, QString path);
+    QString GetEnvVar(QString name);
     QSqlDatabase currentDatabase() const;
     QStringList GetListOfPositionParameters();
     QList<float> GetListOfDefaultPositionParameters();
@@ -44,6 +45,9 @@ public:
     void InsertMaterialProperty(QString name, QString formula, QString property);
     void UpdateMaterialProperty(QString name, QString property);
     QString GetMaterialProperty(QString name);
+    QStringList GetRecentFileList();
+    void AddToRecentFiles(QString file);
+    //QStringList GetRecentFilePhysicsList();
 };
 
 

@@ -34,6 +34,7 @@
 #include <QJsonArray>
 #include <SimpleMaterialBuilder.h>
 #include <SimpleMaterialPropertyBuilder.h>
+#include <iCanvas.h>
 
 namespace Ui {
 class Simple;
@@ -53,6 +54,7 @@ public:
     void InitMaterials();
     void InitPhysicsLists();
     void CreateMenus();
+    void OpenFile(QString fileName);
     void output(QString content, QString type="");
     QStringList refPhysicsNames;
     QStringList refPhysicsHints;
@@ -85,7 +87,11 @@ public:
     void SetGunParameters(QJsonObject jsonObject);
     void SetUIParameters(QJsonObject jsonObject);
     void SaveProject(QString fileName);
-
+    void IncrementRunId();
+    void GetOutputDirectory();
+    void HandleOutputFiles();
+    QStringList GetRecentFileList();
+    QString GetPhysicsList(QString fileName);// physics list of recent files
     bool AddTabWidget(QWidget* w,const QString s);
     QTabWidget* GetViewerTabWidget();
     QJsonArray gunParams();
@@ -274,6 +280,20 @@ private slots:
 
     void on_auto_search_cvmfs_clicked();
 
+    void set_output_directory(QString s);
+
+    void on_select_directory_clicked();
+
+    void on_db_type_currentIndexChanged(int index);
+
+    void on_show_output_directory_clicked();
+
+    void on_clear_output_directory_clicked();
+
+    void on_fileList_currentIndexChanged(const QString &arg1);
+
+    void on_fit_clicked();
+
 private:
     Ui::Simple *ui;
     G4UImanager* UImanager;
@@ -312,6 +332,13 @@ private:
     bool is_vis_disabled;
     bool is_first_time_use;
     bool is_gdml;
+    int run_id;
+    QString output_directory;
+    QString output_filename;// this will change for every run
+    QString mesh_file_prefix;
+    QStringList output_filelist;
+    QString recent_file; // the file that user opened from the recent list
+    iCanvas* canvas;
 
 
 

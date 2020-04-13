@@ -76,12 +76,13 @@ SimpleMesh::SimpleMesh(QString type, QString qty, QString filter)
     //    scoring_filter.append(filter);
 }
 
-void SimpleMesh::writeToFile(QString fileName)
+void SimpleMesh::writeToFile(QString file_prefix)
 {
 
-    if(fileName=="")
-        fileName = "data/temp-"+scoring_qty+"-"+mesh_name;
-    QString command = QString("/score/dumpAllQuantitiesToFile %1 %2").arg(mesh_name).arg(fileName); // this writes to csv format
+    //if(fileName==""){
+    mesh_file_name = file_prefix+scoring_qty+"-"+mesh_name;
+    //}
+    QString command = QString("/score/dumpAllQuantitiesToFile %1 %2").arg(mesh_name).arg(mesh_file_name); // this writes to csv format
     execute(command);
 
 
@@ -92,13 +93,13 @@ void SimpleMesh::writeToFile(QString fileName)
     //# iX, iY, iZ, total(value) [MeV], total(val^2), entry
     //0,0,0,0.09558370555881757,0.0001435852588928847,100
 
-    QFile file(fileName);
+    QFile file(mesh_file_name);
     QStringList lineData;
     if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug()<<"Error reading mesh file "<<fileName;
+        qDebug()<<"Error reading mesh file "<<mesh_file_name;
     }
 
-    TFile *rootfile = new TFile(fileName.append(".root").toLatin1().data(),"RECREATE");
+    TFile *rootfile = new TFile(mesh_file_name.append(".root").toLatin1().data(),"RECREATE");
     TTree *tree = new TTree("mesh_data", "Converted using Simple");
     int binx, biny, binz, entries;
     double value, variance;
@@ -119,13 +120,13 @@ void SimpleMesh::writeToFile(QString fileName)
                 //tree->Branch("val",&value);
             }
             else {
-                qDebug()<<"Error: Mesh file "<<fileName<<" does not contain 6 headers...";
+                qDebug()<<"Error: Mesh file "<<mesh_file_name<<" does not contain 6 headers...";
                 break;
             }
         }
         if(readLines>=3){
             if(lineData.count()!=6){
-                qDebug()<<"Error: Mesh file "<<fileName<<" does not contain 6 columns...";
+                qDebug()<<"Error: Mesh file "<<mesh_file_name<<" does not contain 6 columns...";
                 break;
             }
 

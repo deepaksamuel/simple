@@ -383,10 +383,10 @@ void IROOTWorksheet::ApplyFilter(QString cut)
     }
 }
 
-void IROOTWorksheet::PlotData(QString plotString, QString cutString, QString opt)
+int IROOTWorksheet::PlotData(QString plotString, QString cutString, QString opt)
 {
     if(tree!=nullptr){
-        tree->Draw(plotString.toLatin1().data(), cutString.toLatin1().data(),opt.toLatin1().data());
+        return tree->Draw(plotString.toLatin1().data(), cutString.toLatin1().data(),opt.toLatin1().data());
     }
 }
 

@@ -57,7 +57,7 @@ public:
     void SetCurrentFile(QString rootFile);
     void ApplyFilter(QString cut);
     QList <TTree*> GetTree(TFile* f);
-    void PlotData(QString plotString, QString cutString="", QString opt="");
+    int PlotData(QString plotString, QString cutString="", QString opt="");
 
 private slots:
     void insertRowAbove();

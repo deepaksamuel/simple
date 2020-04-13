@@ -7,6 +7,7 @@
 #include "SimpleDetectorConstruction.h"
 #include <G4coutDestination.hh>
 #include <g4root.hh>
+#include <QDebug>
 
 
 
@@ -14,6 +15,7 @@ SimpleRunAction::SimpleRunAction() : G4UserRunAction()
 {
 
     G4RunManager::GetRunManager()->SetPrintProgress(10000);
+    run_id=0;
 }
 
 
@@ -29,6 +31,11 @@ SimpleRunAction::~SimpleRunAction()
 ////    save_process = rec_process;
 
 //}
+void SimpleRunAction::SetOutputFile(QString file)
+{
+    fileName =file;
+    qDebug()<<"Output file set to: "<<file;
+}
 void SimpleRunAction::BeginOfRunAction(const G4Run*)
 {
    //setRecordParameters();
@@ -46,7 +53,10 @@ void SimpleRunAction::BeginOfRunAction(const G4Run*)
 //             del_t, globTime, propTime, locTime,
 //             process};
     // Open an output file
-    man->OpenFile("data/temp-det-output");
+    //QString fileName = QString("data/run%1-det-output").arg(QString::number(run_id).rightJustified(3, '0'));
+    //man->OpenFile("data/temp-det-output");
+    man->OpenFile(fileName.toLatin1().data());
+
     man->CreateNtuple("simple","out_data");
 
     man->CreateNtupleDColumn("eid"); // column Id = 0

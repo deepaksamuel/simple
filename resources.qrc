@@ -15,5 +15,6 @@
         <file>icons/simple-banner.png</file>
         <file>icons/folder.png</file>
         <file>icons/simple.png</file>
+        <file>icons/warn.png</file>
     </qresource>
 </RCC>

@@ -53,7 +53,7 @@ public:
     bool hasRecordingObjects() const;
     void setMagneticFields();
     void print(SimpleObject* obj);
-   QStringList sensitiveVolumes;
+    QStringList sensitiveVolumes;
 
 
    QList <SimpleObject*> objects;

@@ -189,6 +189,13 @@ RESOURCES += \
 
 
 
+
+
+
+
+
+
+
 #Enable this section for Ubuntu 19 version of our code
 ##generated from Geant4-config
 #QMAKE_CXXFLAGS=-DG4INTY_USE_XT -DG4VIS_USE_OPENGL -DG4UI_USE_TCSH -DG4INTY_USE_QT -DG4UI_USE_QT -DG4VIS_USE_OPENGLQT -I/usr/include/x86_64-linux-gnu/qt5/ -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/lib/x86_64-linux-gnu/qt5//mkspecs/linux-g++ -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtOpenGL -I/usr/include/x86_64-linux-gnu/qt5/QtPrintSupport -DG4VIS_USE_OPENGLX -W -Wall -pedantic -Wno-non-virtual-dtor -Wno-long-long -Wwrite-strings -Wpointer-arith -Woverloaded-virtual -Wno-variadic-macros -Wshadow -pipe -pthread -ftls-model=initial-exec -std=c++11 -I/home/samuel/g4/g4-install/bin/../include/Geant4
@@ -214,13 +221,6 @@ RESOURCES += \
 
 # the following line is required for Geant4 to work
 #LIBS+= -L/usr/lib/x86_64-linux-gnu/ -lxerces-c-3.2
-
-
-
-
-
-
-
 #generated from root-config
 #LIBS+=-L/home/samuel/root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4/root/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -pthread -lm -ldl -rdynamic
 #QMAKE_CXXFLAGS+=-pthread -std=c++11 -m64 -I/home/samuel/root_v6.18.04.Linux-ubuntu18-x86_64-gcc7.4/root/include
