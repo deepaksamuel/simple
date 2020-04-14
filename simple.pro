@@ -179,7 +179,9 @@ DISTFILES += \
     deploy-tools/create-app \
     deploy-tools/db.sqlite \
     deploy-tools/app-files/simple.desktop \
-    deploy-tools/app-files/simple.png
+    deploy-tools/app-files/simple.png \
+    macros/visupdate.mac \
+    macros/visinit.mac
 
 RESOURCES += \
     resources.qrc

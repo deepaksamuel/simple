@@ -122,15 +122,15 @@ private slots:
 
     void on_shapesList_currentIndexChanged(int index);
 
-    void on_hide_clicked();
+    //void on_hide_clicked();
 
     void on_objectTree_itemClicked(QTreeWidgetItem *item, int column);
     void UpdateObject(SimpleObject *obj, int index);
 
     void on_objectTree_itemSelectionChanged();
 
-    void on_duplicate_clicked();
-    void on_delete_object_clicked();
+    //void on_duplicate_clicked();
+    //void on_delete_object_clicked();
 
     void on_db_type_currentIndexChanged(const QString &arg1);
 
@@ -146,13 +146,13 @@ private slots:
 
     void on_sel_sourceType_clicked();
 
-    void on_sel_sourceShape_clicked();
+    //void on_sel_sourceShape_clicked();
 
     void on_sel_angDist_clicked();
 
     void on_sel_energyDist_clicked();
 
-    void on_sel_pol_clicked();
+    //void on_sel_pol_clicked();
 
     void on_particleSource_toggled(bool checked);
 
@@ -162,9 +162,9 @@ private slots:
 
     void on_shoot_clicked();
 
-    void on_nthreads_valueChanged(const QString &arg1);
+    //void on_nthreads_valueChanged(const QString &arg1);
 
-    void on_g4_verbosity_currentIndexChanged(const QString &arg1);
+    //void on_g4_verbosity_currentIndexChanged(const QString &arg1);
 
     void on_clearOutput_clicked();
 
@@ -184,13 +184,13 @@ private slots:
 
     void on_plot_options_returnPressed();
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
-    void on_createMesh_clicked();
+    //void on_createMesh_clicked();
 
-    void on_clear_scoring_commands_clicked();
+    //void on_clear_scoring_commands_clicked();
 
-    void on_meshShape_itemClicked(QTreeWidgetItem *item, int column);
+    //void on_meshShape_itemClicked(QTreeWidgetItem *item, int column);
 
     void on_add_box_mesh_clicked();
 
@@ -262,7 +262,7 @@ private slots:
 
     void on_actionHelp_triggered();
 
-    void on_build_from_materials_toggled(bool checked);
+    //void on_build_from_materials_toggled(bool checked);
 
     void on_addNewMaterial_clicked();
 
@@ -288,11 +288,16 @@ private slots:
 
     void on_show_output_directory_clicked();
 
-    void on_clear_output_directory_clicked();
+    //void on_clear_output_directory_clicked();
 
     void on_fileList_currentIndexChanged(const QString &arg1);
 
     void on_fit_clicked();
+
+
+
+
+    void on_show_plot_window_toggled(bool checked);
 
 private:
     Ui::Simple *ui;

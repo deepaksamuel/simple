@@ -54,9 +54,9 @@ void SimpleDetectorConstruction::CreateEmptyWorld()
     att.SetColor(col.GetRed(),col.GetGreen(),col.GetBlue(),0.2);
     att.SetVisibility(true);
 
-    solidWorld = new G4Box("World0",10, 10, 10);     //its size
-    logicWorld = new G4LogicalVolume(solidWorld, world_mat, "World0");            //its name
-    physWorld = new G4PVPlacement(0,  G4ThreeVector(), logicWorld, "World0", 0,false, 0,true);        //overlaps checking
+    solidWorld = new G4Box("World",10, 10, 10);     //its size
+    logicWorld = new G4LogicalVolume(solidWorld, world_mat, "World");            //its name
+    physWorld = new G4PVPlacement(0,  G4ThreeVector(), logicWorld, "World", 0,false, 0,true);        //overlaps checking
 
     logicWorld->SetVisAttributes(att);
 
@@ -189,12 +189,16 @@ G4VPhysicalVolume* SimpleDetectorConstruction::Construct()
         G4LogicalVolumeStore::GetInstance()->Clean();
         G4SolidStore::GetInstance()->Clean();
         G4RunManager::GetRunManager()->PhysicsHasBeenModified();
+        qDebug()<<"Number of objects"<<objects.count();
+
         if(objects.count()==0){ //create an empty box if nothing is present
             // G4cout<<"No world volume found!";
+            G4cout<<"Creating empty world volume";
             CreateEmptyWorld();
         }
         else{
-            //qDebug()<<"Number of objects"<<objects.count();
+            qDebug()<<"Number of objects"<<objects.count();
+
             bool magFieldChanged=false;
             for(int ii=0; ii<objects.count(); ii++){
                 SimpleObject* obj = objects.at(ii);

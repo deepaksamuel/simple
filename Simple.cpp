@@ -399,6 +399,8 @@ void Simple::InitUI()
     ui->toolBox->setCurrentIndex(0);
     ui->addNewMaterial->hide();
     ui->ploterror->hide();
+    ui->outtabWidget->hide();
+    is_gdml =false;
 }
 
 void Simple::InitRoot()
@@ -531,9 +533,9 @@ void Simple::InitGeant4(int argc, char *argv[])
     QList <int> size;
     size.append(1);
     size.append(2);
-    ui->splitter->setSizes(size);
+    //    ui->splitter->setSizes(size);
     ui->splitter_2->setSizes(size);
-    ui->splitter_3->setSizes(size);
+    //    ui->splitter_3->setSizes(size);
     on_addObject_clicked();
 
 
@@ -921,6 +923,7 @@ void Simple::on_addObject_clicked()
 void Simple::UpdateGeometry()
 {
     SimpleDetectorConstruction* detector = (SimpleDetectorConstruction*) G4RunManager::GetRunManager()->GetUserDetectorConstruction();
+    //qDebug()<<"is_gdml"<<is_gdml;
     if(!is_gdml)
         detector->SetObjectList(objectList);
 
@@ -1011,12 +1014,12 @@ void Simple::on_shapesList_currentIndexChanged(int index)
     //  ui->parameters_stack->setCurrentIndex(index);
 }
 
-void Simple::on_hide_clicked()
-{
+//void Simple::on_hide_clicked()
+//{
 
 
 
-}
+//}
 
 void Simple::on_objectTree_itemClicked(QTreeWidgetItem *item, int column)
 {
@@ -1045,37 +1048,37 @@ void Simple::UpdateObject(SimpleObject *obj, int index)
     UpdateGeometry();
 }
 
-void Simple::on_delete_object_clicked()
-{
-    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
-    //if(l.count()==1){
+//void Simple::on_delete_object_clicked()
+//{
+//    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
+//    //if(l.count()==1){
 
-    foreach(QTreeWidgetItem *t, l){
-        int row = ui->objectTree->indexOfTopLevelItem(t);
-        if(row!=0) { // row==0 is the World - do not allow to delete
-            object_table_model->setObject(nullptr,-1); // set invalid pointers
-            SimpleObject* obj =objectList.at(row);
-            objectList.removeAt(row);
-            //            if(obj->isMesh()){
-            //                for (int ii=0;ii<scoringObjects.count();ii++) {
-            //                    if(scoringObjects.at(ii)==obj)
-            //                        scoringObjects.removeAt(ii);
-            //                }
-            //            }
-            //            else {
-            //                for (int ii=0;ii<detectorObjects.count();ii++) {
-            //                    if(detectorObjects.at(ii)==obj)
-            //                        detectorObjects.removeAt(ii);
-            //                }
-            //            }
+//    foreach(QTreeWidgetItem *t, l){
+//        int row = ui->objectTree->indexOfTopLevelItem(t);
+//        if(row!=0) { // row==0 is the World - do not allow to delete
+//            object_table_model->setObject(nullptr,-1); // set invalid pointers
+//            SimpleObject* obj =objectList.at(row);
+//            objectList.removeAt(row);
+//            //            if(obj->isMesh()){
+//            //                for (int ii=0;ii<scoringObjects.count();ii++) {
+//            //                    if(scoringObjects.at(ii)==obj)
+//            //                        scoringObjects.removeAt(ii);
+//            //                }
+//            //            }
+//            //            else {
+//            //                for (int ii=0;ii<detectorObjects.count();ii++) {
+//            //                    if(detectorObjects.at(ii)==obj)
+//            //                        detectorObjects.removeAt(ii);
+//            //                }
+//            //            }
 
 
-            ui->objectTree->takeTopLevelItem(row);
-        }
-    }
-    UpdateGeometry();
-    // }
-}
+//            ui->objectTree->takeTopLevelItem(row);
+//        }
+//    }
+//    UpdateGeometry();
+//    // }
+//}
 
 void Simple::on_objectTree_itemSelectionChanged()
 {
@@ -1085,60 +1088,60 @@ void Simple::on_objectTree_itemSelectionChanged()
     }
 }
 
-void Simple::on_duplicate_clicked()
-{
-    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
-    if(l.count()>0){
-        QDialog dialog(this); // Use a layout allowing to have a label next to each field
-        QFormLayout form(&dialog); // Add some text above the fields
-        form.addRow(new QLabel("Duplicate objects"));
+//void Simple::on_duplicate_clicked()
+//{
+//    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
+//    if(l.count()>0){
+//        QDialog dialog(this); // Use a layout allowing to have a label next to each field
+//        QFormLayout form(&dialog); // Add some text above the fields
+//        form.addRow(new QLabel("Duplicate objects"));
 
 
-        QString label = "Axis";
-        QComboBox *axis_choices = new QComboBox(&dialog);
-        axis_choices->addItems({"along x","along y","along z"});
-        form.addRow(label, axis_choices);
+//        QString label = "Axis";
+//        QComboBox *axis_choices = new QComboBox(&dialog);
+//        axis_choices->addItems({"along x","along y","along z"});
+//        form.addRow(label, axis_choices);
 
-        label = "Number of copies";
-        QSpinBox *nCopies = new QSpinBox(&dialog);
-        nCopies->setRange(1,1000);
-        form.addRow(label, nCopies);
+//        label = "Number of copies";
+//        QSpinBox *nCopies = new QSpinBox(&dialog);
+//        nCopies->setRange(1,1000);
+//        form.addRow(label, nCopies);
 
-        label = "Spacing between copies (mm)";
-        QDoubleSpinBox *spacing = new QDoubleSpinBox(&dialog);
-        spacing->setRange(-99999999,99999999);
-        spacing->setDecimals(2);
-        form.addRow(label, spacing);
+//        label = "Spacing between copies (mm)";
+//        QDoubleSpinBox *spacing = new QDoubleSpinBox(&dialog);
+//        spacing->setRange(-99999999,99999999);
+//        spacing->setDecimals(2);
+//        form.addRow(label, spacing);
 
-        QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-                                   Qt::Horizontal, &dialog);
-        form.addRow(&buttonBox);
-        QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
-        QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+//        QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+//                                   Qt::Horizontal, &dialog);
+//        form.addRow(&buttonBox);
+//        QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+//        QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
 
-        // Show the dialog as modal
-        if (dialog.exec() == QDialog::Accepted) {
-            int alongaxis=axis_choices->currentIndex();
-            int ncopies = nCopies->value();
-            double separation = spacing->value();
+//        // Show the dialog as modal
+//        if (dialog.exec() == QDialog::Accepted) {
+//            int alongaxis=axis_choices->currentIndex();
+//            int ncopies = nCopies->value();
+//            double separation = spacing->value();
 
-            foreach(QTreeWidgetItem *t, l){
-                int row = ui->objectTree->indexOfTopLevelItem(t);
-                if(row!=0) { // row==0 is the World - do not allow to duplicate
-                    SimpleObject* obj = objectList.at(row);
-                    SimpleObject* new_object =obj;
-                    for(int ii=0; ii<ncopies;ii++){
-                        new_object =  MakeCopy(new_object, alongaxis, separation);
+//            foreach(QTreeWidgetItem *t, l){
+//                int row = ui->objectTree->indexOfTopLevelItem(t);
+//                if(row!=0) { // row==0 is the World - do not allow to duplicate
+//                    SimpleObject* obj = objectList.at(row);
+//                    SimpleObject* new_object =obj;
+//                    for(int ii=0; ii<ncopies;ii++){
+//                        new_object =  MakeCopy(new_object, alongaxis, separation);
 
-                    }
-                }
-            }
-            UpdateGeometry();
+//                    }
+//                }
+//            }
+//            UpdateGeometry();
 
-        }
+//        }
 
-    }
-}
+//    }
+//}
 
 SimpleObject* Simple::MakeCopy(SimpleObject *obj, int alongaxis, float sep)
 {
@@ -1201,6 +1204,7 @@ void Simple::on_objectTree_customContextMenuRequested(const QPoint &pos)
 
 void Simple::on_isWireframe_stateChanged(int arg1)
 {
+    //qDebug()<<"I am here";
     if(ui->isWireframe->isChecked())
         UImanager->ApplyCommand(QString("/vis/geometry/set/forceWireframe World 1 true ").toLatin1().data());
     else
@@ -1233,14 +1237,14 @@ void Simple::on_sel_sourceType_clicked()
 
 }
 
-void Simple::on_sel_sourceShape_clicked()
-{
-    //     ui->gunStack->setCurrentIndex(3);
-    //    ui->source_group->hide();
-    //    ui->energy_group->show();
-    //    ui->ang_group->hide();
-    //    ui->gunStack->show();
-}
+//void Simple::on_sel_sourceShape_clicked()
+//{
+//    //     ui->gunStack->setCurrentIndex(3);
+//    //    ui->source_group->hide();
+//    //    ui->energy_group->show();
+//    //    ui->ang_group->hide();
+//    //    ui->gunStack->show();
+//}
 
 void Simple::on_sel_angDist_clicked()
 {
@@ -1262,11 +1266,11 @@ void Simple::on_sel_energyDist_clicked()
     //    ui->gunStack->show();
 }
 
-void Simple::on_sel_pol_clicked()
-{
-    //    ui->gunStack->setCurrentIndex(4);
-    //    ui->gunStack->show();
-}
+//void Simple::on_sel_pol_clicked()
+//{
+//    //    ui->gunStack->setCurrentIndex(4);
+//    //    ui->gunStack->show();
+//}
 
 void Simple::on_particleSource_toggled(bool checked)
 {
@@ -1715,16 +1719,16 @@ void Simple::InitRecordParameters()
                             ui->recordProcessName->isChecked());
 }
 
-void Simple::on_nthreads_valueChanged(const QString &arg1)
-{
-    runManager->SetNumberOfThreads(arg1.toInt());//
-}
+//void Simple::on_nthreads_valueChanged(const QString &arg1)
+//{
+//    runManager->SetNumberOfThreads(arg1.toInt());//
+//}
 
-void Simple::on_g4_verbosity_currentIndexChanged(const QString &arg1)
-{
-    //    QString verbosity = QString("/vis/verbose %1").arg(ui->g4_verbosity->currentIndex());
-    //    Execute(verbosity);
-}
+//void Simple::on_g4_verbosity_currentIndexChanged(const QString &arg1)
+//{
+//    //    QString verbosity = QString("/vis/verbose %1").arg(ui->g4_verbosity->currentIndex());
+//    //    Execute(verbosity);
+//}
 
 void Simple::on_clearOutput_clicked()
 {
@@ -1787,10 +1791,10 @@ void Simple::on_filterString_editingFinished()
 void Simple::on_plot_clicked()
 {
     ui->ploterror->hide();
-   if(worksheet->PlotData(ui->plotString->text(),ui->cutString->text(),ui->plot_options->text())<0)
-   {
-       ui->ploterror->show();
-   }
+    if(worksheet->PlotData(ui->plotString->text(),ui->cutString->text(),ui->plot_options->text())<0)
+    {
+        ui->ploterror->show();
+    }
 }
 
 void Simple::on_plotString_returnPressed()
@@ -1808,56 +1812,56 @@ void Simple::on_plot_options_returnPressed()
     on_plot_clicked();
 }
 
-void Simple::on_pushButton_clicked()
-{
+//void Simple::on_pushButton_clicked()
+//{
 
-    Execute("/score/colorMap/floatMinMax");
-    //Execute(QString("/score/drawProjection %1 %2%1").arg(scoringObjects.at(0)->GetObjectName()).arg(scoringObjects.at(0)->MeasurementQuantities().at(0)));
+//    Execute("/score/colorMap/floatMinMax");
+//    //Execute(QString("/score/drawProjection %1 %2%1").arg(scoringObjects.at(0)->GetObjectName()).arg(scoringObjects.at(0)->MeasurementQuantities().at(0)));
 
-}
+//}
 
-void Simple::on_createMesh_clicked()
-{
-    //    if(ui->meshShape->selectedItems().count()==0){
-    //        QMessageBox::warning(this,"Mesh shape not selected", "Atleast one mesh shape should be selected from the list!");
-    //        return;
-    //    }
-    //    if(ui->scoring_qty->selectedItems().count()==0) {
-    //        QMessageBox::warning(this,"Scoring parameter not selected", "Atleast one measurement parameter should be selected from the list!");
-    //        return;
-    //    }
+//void Simple::on_createMesh_clicked()
+//{
+//    //    if(ui->meshShape->selectedItems().count()==0){
+//    //        QMessageBox::warning(this,"Mesh shape not selected", "Atleast one mesh shape should be selected from the list!");
+//    //        return;
+//    //    }
+//    //    if(ui->scoring_qty->selectedItems().count()==0) {
+//    //        QMessageBox::warning(this,"Scoring parameter not selected", "Atleast one measurement parameter should be selected from the list!");
+//    //        return;
+//    //    }
 
-}
+//}
 
-void Simple::on_clear_scoring_commands_clicked()
-{
+//void Simple::on_clear_scoring_commands_clicked()
+//{
 
-}
+//}
 
-void Simple::on_meshShape_itemClicked(QTreeWidgetItem *item, int column)
-{
-    //    QString objType = item->text(0);
-    //    QString createMesh_command;
-    //    QString meshSize_command;
-    //    if(objType=="Box"){
-    //        createMesh_command = QString("/score/create/boxMesh Box-Mesh-%1").arg(mesh_id++,3,10, QChar('0');
-    //        meshSize_command = QString("/score/mesh/boxSize 10 10 10 mm");
-    //    }
-    //    else if(objType=="Cylinder"){
-    //        createMesh_command = QString("/score/create/cylinderMesh Cyl-Mesh-%1").arg(mesh_id++,3,10, QChar('0');
-    //        meshSize_command = QString("/score/mesh/cylinderSize 10 10 mm");
-    //    }
+//void Simple::on_meshShape_itemClicked(QTreeWidgetItem *item, int column)
+//{
+//    //    QString objType = item->text(0);
+//    //    QString createMesh_command;
+//    //    QString meshSize_command;
+//    //    if(objType=="Box"){
+//    //        createMesh_command = QString("/score/create/boxMesh Box-Mesh-%1").arg(mesh_id++,3,10, QChar('0');
+//    //        meshSize_command = QString("/score/mesh/boxSize 10 10 10 mm");
+//    //    }
+//    //    else if(objType=="Cylinder"){
+//    //        createMesh_command = QString("/score/create/cylinderMesh Cyl-Mesh-%1").arg(mesh_id++,3,10, QChar('0');
+//    //        meshSize_command = QString("/score/mesh/cylinderSize 10 10 mm");
+//    //    }
 
-    //    QString meshPos_command = QString("/score/mesh/translate/xyz 0 0 0 mm");
+//    //    QString meshPos_command = QString("/score/mesh/translate/xyz 0 0 0 mm");
 
-    //    QString meshrotx_command = QString("/score/mesh/rotate/rotateX 0 deg")));
-    //    QString meshroty_command = QString("/score/mesh/rotate/rotateY 0 deg");
-    //    QString meshrotz_command = QString("/score/mesh/rotate/rotateZ 0 deg");
+//    //    QString meshrotx_command = QString("/score/mesh/rotate/rotateX 0 deg")));
+//    //    QString meshroty_command = QString("/score/mesh/rotate/rotateY 0 deg");
+//    //    QString meshrotz_command = QString("/score/mesh/rotate/rotateZ 0 deg");
 
 
-    //    QString meshBin_command = QString("/score/mesh/nBin %1 %2 %3").arg(bins.x()).arg(bins.y()).arg(bins.z());
+//    //    QString meshBin_command = QString("/score/mesh/nBin %1 %2 %3").arg(bins.x()).arg(bins.y()).arg(bins.z());
 
-}
+//}
 
 void Simple::on_add_box_mesh_clicked()
 {
@@ -2310,6 +2314,7 @@ void Simple::InitViewer()
 
     QFile file("macros/visinit.mac");
     if(file.exists()){
+        //qDebug()<<"Exectuting file...";
         Execute("/control/execute macros/visinit.mac");
         return;
     }
@@ -2317,7 +2322,7 @@ void Simple::InitViewer()
     QStringList commands ={
         "/run/initialize",
         "/vis/open OGLSQt 800x800-0+0",
-        "/vis/viewer/set/background black",
+        "/vis/viewer/set/background white",
         "/vis/drawVolume",
         "/vis/viewer/set/viewpointVector -1 0 1",
         "/vis/viewer/set/lightsVector -1 0 0",
@@ -2434,7 +2439,7 @@ void Simple::on_actionShoot_beam_triggered()
 
 void Simple::on_actionMacro_triggered()
 {
-    ui->outtabWidget->setCurrentIndex(2);
+    ui->tabWidget1->setCurrentIndex(2);
     on_run_macro_clicked();
 }
 
@@ -2463,7 +2468,7 @@ void Simple::on_actionDetecor_view_triggered()
 
 void Simple::on_actionPlots_triggered()
 {
-    ui->outtabWidget->setCurrentIndex(1);
+    ui->outtabWidget->show();
 }
 
 void Simple::on_actionScene_Object_Window_triggered()
@@ -2520,14 +2525,14 @@ void Simple::on_actionHelp_triggered()
                              tr("Please write to me at deepaksamuel@gmail.com"));
 }
 
-void Simple::on_build_from_materials_toggled(bool checked)
-{
-    //    if(checked){
-    //        ui->materialStack->setCurrentIndex(1);
-    //    }
-    //    else
-    //        ui->materialStack->setCurrentIndex(0);
-}
+//void Simple::on_build_from_materials_toggled(bool checked)
+//{
+//    //    if(checked){
+//    //        ui->materialStack->setCurrentIndex(1);
+//    //    }
+//    //    else
+//    //        ui->materialStack->setCurrentIndex(0);
+//}
 
 void Simple::on_addNewMaterial_clicked()
 {
@@ -2819,18 +2824,18 @@ void Simple::on_show_output_directory_clicked()
     ui->fileDirectoryView->setExpanded(fileSystemModel->index(output_directory),true);
 }
 
-void Simple::on_clear_output_directory_clicked()
-{
-    //    QMessageBox::StandardButton reply;
-    //      reply = QMessageBox::question(this, "Delete", "Quit?",
-    //                                    QMessageBox::Yes|QMessageBox::No);
-    //      if (reply == QMessageBox::Yes) {
-    //        qDebug() << "Yes was clicked";
-    //        QApplication::quit();
-    //      } else {
-    //        qDebug() << "Yes was *not* clicked";
-    //      }
-}
+//void Simple::on_clear_output_directory_clicked()
+//{
+//    //    QMessageBox::StandardButton reply;
+//    //      reply = QMessageBox::question(this, "Delete", "Quit?",
+//    //                                    QMessageBox::Yes|QMessageBox::No);
+//    //      if (reply == QMessageBox::Yes) {
+//    //        qDebug() << "Yes was clicked";
+//    //        QApplication::quit();
+//    //      } else {
+//    //        qDebug() << "Yes was *not* clicked";
+//    //      }
+//}
 
 void Simple::on_fileList_currentIndexChanged(const QString &arg1)
 {
@@ -2867,4 +2872,17 @@ void Simple::on_fit_clicked()
         }
     }
     canvas->Refresh();
+}
+
+
+
+
+
+void Simple::on_show_plot_window_toggled(bool checked)
+{
+    if(checked)
+        ui->outtabWidget->show();
+    else {
+        ui->outtabWidget->hide();
+    }
 }

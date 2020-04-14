@@ -1,6 +1,6 @@
 /run/initialize
 /vis/open OGLSQt 800x800-0+0
-/vis/viewer/set/background white
+/vis/viewer/set/background black
 /vis/drawVolume
 /vis/viewer/set/viewpointVector -1 0 1
 /vis/viewer/set/lightsVector -1 0 0
