@@ -181,7 +181,8 @@ DISTFILES += \
     deploy-tools/app-files/simple.desktop \
     deploy-tools/app-files/simple.png \
     macros/visupdate.mac \
-    macros/visinit.mac
+    macros/visinit.mac \
+    models/gold-foil.sim
 
 RESOURCES += \
     resources.qrc

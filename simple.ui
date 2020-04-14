@@ -2585,7 +2585,7 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
               <rect>
                <x>0</x>
                <y>0</y>
-               <width>1432</width>
+               <width>1412</width>
                <height>223</height>
               </rect>
              </property>
@@ -2882,6 +2882,12 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
             </item>
             <item>
              <widget class="QLineEdit" name="plot_options">
+              <property name="maximumSize">
+               <size>
+                <width>150</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="placeholderText">
                <string>options</string>
               </property>
@@ -2903,6 +2909,18 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
             </item>
             <item>
              <widget class="QPushButton" name="plot">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>48</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="font">
                <font>
                 <family>Ubuntu Condensed</family>
@@ -2922,7 +2940,38 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
              </widget>
             </item>
             <item>
+             <spacer name="horizontalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Minimum</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>75</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="QComboBox" name="fitfunction">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>150</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="editable">
+               <bool>true</bool>
+              </property>
               <item>
                <property name="text">
                 <string>gaus</string>
@@ -2987,6 +3036,18 @@ font: 8pt &quot;Ubuntu Condensed&quot;;</string>
             </item>
             <item>
              <widget class="QPushButton" name="fit">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>23</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="font">
                <font>
                 <family>Ubuntu Condensed</family>

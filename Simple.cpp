@@ -39,6 +39,7 @@
 #include "G4GDMLParser.hh"
 #include <QInputDialog>
 #include <QDateTime>
+#include <TF1.h>
 
 Simple::Simple(int argc, char *argv[],QWidget *parent) :
     QMainWindow(parent),
@@ -2849,6 +2850,12 @@ void Simple::on_fit_clicked()
 {
     QString fit=ui->fitfunction->currentText();
     QStringList objs= canvas->GetListofFittableObjects();
+    TF1 *fit_func;
+    bool user_defined=false;
+    if(fit.contains("[")){ // user defined
+        fit_func=new TF1("f1",fit.toLatin1().data());
+        user_defined=true;
+    }
     foreach(QString s, objs)
     {
         QStringList a = s.split(" ");
@@ -2859,14 +2866,20 @@ void Simple::on_fit_clicked()
             if(hist!=NULL){
                 gStyle->SetOptFit(1111);
                 gROOT->ForceStyle();
-                hist->Fit(fit.toLatin1().data());
+                if(user_defined)
+                    hist->Fit(fit_func);
+                else
+                    hist->Fit(fit.toLatin1().data());
             }
             else {
                 TGraph *graph = dynamic_cast<TGraph*> (object);
                 if(graph!=NULL){
                     gStyle->SetOptFit(1111);
                     gROOT->ForceStyle();
-                    graph->Fit(fit.toLatin1().data());
+                    if(user_defined)
+                        graph->Fit(fit_func);
+                    else
+                        graph->Fit(fit.toLatin1().data());
                 }
             }
         }
