@@ -182,7 +182,14 @@ DISTFILES += \
     deploy-tools/app-files/simple.png \
     macros/visupdate.mac \
     macros/visinit.mac \
-    models/gold-foil.sim
+    models/gold-foil.sim \
+    deploy-tools/models/gold-foil.sim \
+    deploy-tools/models/musr.sim \
+    deploy-tools/models/mICAL.sim \
+    deploy-tools/models/cobalt-decay.sim \
+    deploy-tools/models/cerenkov.sim \
+    deploy-tools/models/bragg-peak.sim \
+    deploy-tools/models/ICAL2.sim
 
 RESOURCES += \
     resources.qrc

@@ -1049,37 +1049,37 @@ void Simple::UpdateObject(SimpleObject *obj, int index)
     UpdateGeometry();
 }
 
-//void Simple::on_delete_object_clicked()
-//{
-//    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
-//    //if(l.count()==1){
+void Simple::on_delete_object_clicked()
+{
+    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
+    //if(l.count()==1){
 
-//    foreach(QTreeWidgetItem *t, l){
-//        int row = ui->objectTree->indexOfTopLevelItem(t);
-//        if(row!=0) { // row==0 is the World - do not allow to delete
-//            object_table_model->setObject(nullptr,-1); // set invalid pointers
-//            SimpleObject* obj =objectList.at(row);
-//            objectList.removeAt(row);
-//            //            if(obj->isMesh()){
-//            //                for (int ii=0;ii<scoringObjects.count();ii++) {
-//            //                    if(scoringObjects.at(ii)==obj)
-//            //                        scoringObjects.removeAt(ii);
-//            //                }
-//            //            }
-//            //            else {
-//            //                for (int ii=0;ii<detectorObjects.count();ii++) {
-//            //                    if(detectorObjects.at(ii)==obj)
-//            //                        detectorObjects.removeAt(ii);
-//            //                }
-//            //            }
+    foreach(QTreeWidgetItem *t, l){
+        int row = ui->objectTree->indexOfTopLevelItem(t);
+        if(row!=0) { // row==0 is the World - do not allow to delete
+            object_table_model->setObject(nullptr,-1); // set invalid pointers
+            SimpleObject* obj =objectList.at(row);
+            objectList.removeAt(row);
+            //            if(obj->isMesh()){
+            //                for (int ii=0;ii<scoringObjects.count();ii++) {
+            //                    if(scoringObjects.at(ii)==obj)
+            //                        scoringObjects.removeAt(ii);
+            //                }
+            //            }
+            //            else {
+            //                for (int ii=0;ii<detectorObjects.count();ii++) {
+            //                    if(detectorObjects.at(ii)==obj)
+            //                        detectorObjects.removeAt(ii);
+            //                }
+            //            }
 
 
-//            ui->objectTree->takeTopLevelItem(row);
-//        }
-//    }
-//    UpdateGeometry();
-//    // }
-//}
+            ui->objectTree->takeTopLevelItem(row);
+        }
+    }
+    UpdateGeometry();
+    // }
+}
 
 void Simple::on_objectTree_itemSelectionChanged()
 {
@@ -1089,60 +1089,60 @@ void Simple::on_objectTree_itemSelectionChanged()
     }
 }
 
-//void Simple::on_duplicate_clicked()
-//{
-//    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
-//    if(l.count()>0){
-//        QDialog dialog(this); // Use a layout allowing to have a label next to each field
-//        QFormLayout form(&dialog); // Add some text above the fields
-//        form.addRow(new QLabel("Duplicate objects"));
+void Simple::on_duplicate_clicked()
+{
+    QList <QTreeWidgetItem*> l= ui->objectTree->selectedItems();
+    if(l.count()>0){
+        QDialog dialog(this); // Use a layout allowing to have a label next to each field
+        QFormLayout form(&dialog); // Add some text above the fields
+        form.addRow(new QLabel("Duplicate objects"));
 
 
-//        QString label = "Axis";
-//        QComboBox *axis_choices = new QComboBox(&dialog);
-//        axis_choices->addItems({"along x","along y","along z"});
-//        form.addRow(label, axis_choices);
+        QString label = "Axis";
+        QComboBox *axis_choices = new QComboBox(&dialog);
+        axis_choices->addItems({"along x","along y","along z"});
+        form.addRow(label, axis_choices);
 
-//        label = "Number of copies";
-//        QSpinBox *nCopies = new QSpinBox(&dialog);
-//        nCopies->setRange(1,1000);
-//        form.addRow(label, nCopies);
+        label = "Number of copies";
+        QSpinBox *nCopies = new QSpinBox(&dialog);
+        nCopies->setRange(1,1000);
+        form.addRow(label, nCopies);
 
-//        label = "Spacing between copies (mm)";
-//        QDoubleSpinBox *spacing = new QDoubleSpinBox(&dialog);
-//        spacing->setRange(-99999999,99999999);
-//        spacing->setDecimals(2);
-//        form.addRow(label, spacing);
+        label = "Spacing between copies (mm)";
+        QDoubleSpinBox *spacing = new QDoubleSpinBox(&dialog);
+        spacing->setRange(-99999999,99999999);
+        spacing->setDecimals(2);
+        form.addRow(label, spacing);
 
-//        QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
-//                                   Qt::Horizontal, &dialog);
-//        form.addRow(&buttonBox);
-//        QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
-//        QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+        QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+                                   Qt::Horizontal, &dialog);
+        form.addRow(&buttonBox);
+        QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+        QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
 
-//        // Show the dialog as modal
-//        if (dialog.exec() == QDialog::Accepted) {
-//            int alongaxis=axis_choices->currentIndex();
-//            int ncopies = nCopies->value();
-//            double separation = spacing->value();
+        // Show the dialog as modal
+        if (dialog.exec() == QDialog::Accepted) {
+            int alongaxis=axis_choices->currentIndex();
+            int ncopies = nCopies->value();
+            double separation = spacing->value();
 
-//            foreach(QTreeWidgetItem *t, l){
-//                int row = ui->objectTree->indexOfTopLevelItem(t);
-//                if(row!=0) { // row==0 is the World - do not allow to duplicate
-//                    SimpleObject* obj = objectList.at(row);
-//                    SimpleObject* new_object =obj;
-//                    for(int ii=0; ii<ncopies;ii++){
-//                        new_object =  MakeCopy(new_object, alongaxis, separation);
+            foreach(QTreeWidgetItem *t, l){
+                int row = ui->objectTree->indexOfTopLevelItem(t);
+                if(row!=0) { // row==0 is the World - do not allow to duplicate
+                    SimpleObject* obj = objectList.at(row);
+                    SimpleObject* new_object =obj;
+                    for(int ii=0; ii<ncopies;ii++){
+                        new_object =  MakeCopy(new_object, alongaxis, separation);
 
-//                    }
-//                }
-//            }
-//            UpdateGeometry();
+                    }
+                }
+            }
+            UpdateGeometry();
 
-//        }
+        }
 
-//    }
-//}
+    }
+}
 
 SimpleObject* Simple::MakeCopy(SimpleObject *obj, int alongaxis, float sep)
 {
@@ -1627,6 +1627,7 @@ void Simple::HandleOutputFiles()
         QString mesh_file_name = mesh->get_output_file_name();
         if(mesh_file_name!=""){
             //  if(hasToRecord==false){ // if no detector files are present then mesh files are opened automatically
+            ui->current_view->setText("Current view: "+mesh_file_name);
             worksheet->SetCurrentFile(mesh_file_name);
             QCompleter *c = new QCompleter(worksheet->getHeader());
             ui->plotString->setCompleter(c);
@@ -1639,6 +1640,7 @@ void Simple::HandleOutputFiles()
     {
         if(o->storeData()==true){
             hasToRecord =true;
+            ui->current_view->setText("Current view: "+output_filename);
             worksheet->SetCurrentFile(output_filename);
             QCompleter *c = new QCompleter(worksheet->getHeader());
             ui->plotString->setCompleter(c);
@@ -1899,6 +1901,7 @@ void Simple::on_meshes_itemClicked(QTreeWidgetItem *item, int column)
         mesh_table_model->setMesh(meshList.at(row));
         qDebug()<<QString("data/%1").arg(meshList.at(row)->get_output_file_name());
         worksheet->SetCurrentFile(QString("data/%1").arg(meshList.at(row)->get_output_file_name()));
+        ui->current_view->setText("Current view: "+QString("data/%1").arg(meshList.at(row)->get_output_file_name()));
     }
 }
 
@@ -2010,6 +2013,7 @@ void Simple::on_fileDirectoryView_doubleClicked(const QModelIndex &index)
     QString fileName = fileSystemModel->filePath(index);
     if(fileName!="" && fileName.contains(".root")){
         worksheet->SetCurrentFile(fileName);
+        ui->current_view->setText("Current view: "+fileName);
         QCompleter *c = new QCompleter(worksheet->getHeader());
         ui->plotString->setCompleter(c);
         ui->cutString->setCompleter(c);
@@ -2841,6 +2845,7 @@ void Simple::on_show_output_directory_clicked()
 void Simple::on_fileList_currentIndexChanged(const QString &arg1)
 {
     worksheet->SetCurrentFile(arg1);
+    ui->current_view->setText("Current view: "+arg1);
     QCompleter *c = new QCompleter(worksheet->getHeader());
     ui->plotString->setCompleter(c);
     ui->cutString->setCompleter(c);

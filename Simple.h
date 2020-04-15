@@ -129,8 +129,8 @@ private slots:
 
     void on_objectTree_itemSelectionChanged();
 
-    //void on_duplicate_clicked();
-    //void on_delete_object_clicked();
+    void on_duplicate_clicked();
+    void on_delete_object_clicked();
 
     void on_db_type_currentIndexChanged(const QString &arg1);
 
