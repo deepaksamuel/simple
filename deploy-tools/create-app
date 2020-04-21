@@ -73,6 +73,19 @@ else
       cp -r $ROOTSYS/icons simple-app/usr
       cp -r $ROOTSYS/lib simple-app/usr
       cp -r $ROOTSYS/bin simple-app/usr
+
+      echo "If you see errors after h2root, then install gfortran: sudo apt-get install gfortran"
+      echo "If the ROOT binary is directly downloaded from the website, then the following removals are required!"
+      rm simple-app/usr/bin/proofd
+      rm simple-app/usr/lib/libNetxNG.so
+      rm simple-app/usr/lib/libNetx.so
+      rm simple-app/usr/lib/libProofx.so
+      rm simple-app/usr/lib/libXrdProofd.so
+      rm simple-app/usr/lib/libGenetic.so
+      rm simple-app/usr/lib/libTMVA.so
+      rm simple-app/usr/lib/libEGPythia8.so
+      rm simple-app/usr/lib/libTMVAGui.so
+
       	
 fi
 

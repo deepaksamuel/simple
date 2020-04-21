@@ -142,7 +142,15 @@ message("Please run Qtcreator from the command line and make sure that ROOTSYS a
 #Geant4 settings
 QMAKE_CXXFLAGS+=$$system(geant4-config --cflags)
 LIBS+=$$system(geant4-config --libs)
+
+#for ubuntu 16
+#message("Using xerces-c-3.1 for Ubuntu 16. Please change this in the project file, if you are running another OS")
+#LIBS+= -L/usr/lib/x86_64-linux-gnu/ -lxerces-c-3.1
+
+#for ubuntu 19
+message("Using xerces-c-3.2 for Ubuntu 19. Please change this in the project file, if you are running another OS")
 LIBS+= -L/usr/lib/x86_64-linux-gnu/ -lxerces-c-3.2
+
 #ROOT settings
 LIBS+=$$system(root-config --glibs)
 QMAKE_CXXFLAGS+=$$system(root-config --cflags)
@@ -192,7 +200,8 @@ DISTFILES += \
     deploy-tools/models/cobalt-decay.sim \
     deploy-tools/models/cerenkov.sim \
     deploy-tools/models/bragg-peak.sim \
-    deploy-tools/models/ICAL2.sim
+    deploy-tools/models/ICAL2.sim \
+    deploy-tools/install-g4-dependencies
 
 RESOURCES += \
     resources.qrc

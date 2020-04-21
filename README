@@ -1,6 +1,21 @@
 Latest update:
 Run the create-app file: source create-app and the app is automatically created
 
+
+
+The following needs to be run before building Geant4 on a clean system (only if  you are building from the source):
+#install git
+sudo apt-get install git
+#install cmake
+sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ xenial main'
+sudo apt-get update
+sudo apt-get install cmake
+sudo apt-get install libxerces-c-dev
+sudo apt-get install qt5-default
+sudo apt-get install libxmu-dev
+
+
+
 //Old instructions:
 Download from https://github.com/linuxdeploy
 a) linuxdeploy
