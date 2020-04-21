@@ -173,6 +173,7 @@ int Simple::InitDB()
                     QMessageBox::information(this, tr("Invalid directory locations..."),
                                              tr("Some of the directory locations in the database are incorrect, please verify in settings!"));
                     //return 0;
+                    break;
                 }
             }
 
@@ -243,7 +244,7 @@ void Simple::InitEnvVars()
             ui->env_var_error->setText("Error: one of the folder does not exist - check output log.");
         }
     }
-
+    //qputenv("QT_PLUGIN_PATH","../plugins");
     output("If you are using the application for the first time, you may have to check if the locations are right in settings","warn");
     run_id=0;
 }

@@ -4,6 +4,7 @@
 // File modified by Deepak Samuel on 25 Sep 2019
 int main(int argc, char *argv[])
 {
+    QCoreApplication::addLibraryPath("../plugins");
     QApplication a(argc, argv);
     Simple w(argc,argv);
     w.show();

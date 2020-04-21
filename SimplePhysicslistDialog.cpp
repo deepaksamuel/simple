@@ -92,6 +92,8 @@ void PhysicsListDialog::on_recent_file_tree_itemDoubleClicked(QTreeWidgetItem *i
         recent_file_name=item->text(0);
         recent_file_physicslist=item->text(1);
         int index = ui->physicsLists->findText(recent_file_physicslist);
+        if(index<0) // this might happen if the file is gdml
+            index=0;
         ui->physicsLists->setCurrentIndex(index); // set the current physics list to be of the recent file that is clicked.
         done(QDialog::Accepted);
     }
@@ -132,7 +134,8 @@ void PhysicsListDialog::on_open_other_files_clicked()
     if(fileName!=""){
         recent_file_name = fileName;
         QFile f(fileName);
-        if(f.exists()){
+        if(f.exists() && fileName.contains(".sim")){
+            //qDebug()<<"Simulation file...";
             if (!f.open(QIODevice::ReadOnly)) {
                 qDebug()<<"Could not open file "<<fileName;
             }
@@ -145,6 +148,12 @@ void PhysicsListDialog::on_open_other_files_clicked()
             int index = ui->physicsLists->findText(recent_file_physicslist);
             ui->physicsLists->setCurrentIndex(index); // set the current physics list to be of the recent file that is clicked.
 
+        }
+        else if(f.exists() && fileName.contains(".gdml")){
+            //qDebug()<<"GDML file...";
+            recent_file_physicslist="FTFP_BERT";
+            int index = ui->physicsLists->findText(recent_file_physicslist);
+            ui->physicsLists->setCurrentIndex(index); // set the current physics list to be of the recent file that is clicked.
         }
     }
      done(QDialog::Accepted);
