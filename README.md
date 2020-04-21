@@ -17,6 +17,7 @@ This tool can also be used as a demonstration tool in nuclear and particle physi
 
 The application is opensource and the alpha release for Linux is available as of now as an AppImage (tested in Ubuntu 19.04) at: 
 Ubuntu 16 and above: https://github.com/deepaksamuel/simple/releases/download/v0.8-alpha/simple-ubuntu-16.04-x64-allfiles.zip
+
 Ubuntu 19: https://github.com/deepaksamuel/simple/releases/download/v0.7-alpha/Simple-Ubuntu19.10-x86_64.AppImage
 
 
