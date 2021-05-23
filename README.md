@@ -5,10 +5,11 @@
 Simple is a front-end to perform Geant4 simulations of particle interactions with matter, without writing any code. It integrates user-friendly tools to create simple geometries, visualize tracks and to perform data analysis with graphing. All you need to do is to download the datasets from Geant4 download page (https://geant4.web.cern.ch/support/download.) and run the Appimage appropriate to your system:
 
 Ubuntu 16 and above: https://github.com/deepaksamuel/simple/releases/download/v0.8-alpha/simple-ubuntu-16.04-x64-allfiles.zip
+
 Ubuntu 19 onwards: https://github.com/deepaksamuel/simple/releases/download/v0.7-alpha/Simple-Ubuntu19.10-x86_64.AppImage
 
 
-This tool can also be used as a demonstration tool in nuclear and particle physics/ medical physics classes and can aid in teaching students about data analysis techniques, in general, using external libraries like python.
+Simple can also be used as a demonstration tool in nuclear and particle physics/ medical physics classes and can aid in teaching students about data analysis techniques, in general, using external libraries like python.
 
 
 <b>AppImages are what executables are for Windows. No need to compile or download Geant4 or ROOT. Just download and double click the app image and you are ready to go!</b>
