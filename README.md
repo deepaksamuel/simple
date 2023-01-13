@@ -25,8 +25,22 @@ As a first example:
 
 #In the dataframe tab, open the data folder which is created automatically in the same folder as your application. This folder contains all the data files created in your simulation. 
 
+
 #Double click on temp-energyDeposit-Box-Mesh.root
 
 #Go to the plots tab and type "totalvalueMeV:binz" and press enter to see the Bragg peak.
 
-
+<b> Branches in the output file <b>
+The output files has the following branches:
+Event ID: eid
+Particle ID: pid
+Detector ID: detecorId
+X/Y/Z position: posx/posy/posz [mm]
+Global time: globTime [ns]
+Proper time: propTime [ns]
+Local time: localTime [ns]
+Energy deposited: tot_edep [MeV]
+Energy: tot_E [MeV]
+Kinetic Energy: tot_KE [MeV]
+Momentum (magnitude) x/y/z: momx / momy / momz [MeV/c]
+Momentum (direction vectors) x/y/z: px / py / pz
